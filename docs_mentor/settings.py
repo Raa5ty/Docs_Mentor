@@ -144,3 +144,13 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'   # Адрес Redis (база 0)
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # Где хранить результаты задач
+CELERY_ACCEPT_CONTENT = ['json']  # Формат данных
+CELERY_TASK_SERIALIZER = 'json'   # Как сериализовать задачи
+CELERY_RESULT_SERIALIZER = 'json' # Как сериализовать результаты
+CELERY_TIMEZONE = 'UTC'           # Временная зона
+CELERY_TASK_TRACK_STARTED = True  # Отслеживать, когда задача началась
+CELERY_TASK_TIME_LIMIT = 30 * 60  # Максимальное время задачи (30 минут)

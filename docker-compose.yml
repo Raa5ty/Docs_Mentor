@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16  # Официальный образ с pgvector
+    container_name: docs_mentor_postgres
+    environment:
+      POSTGRES_DB: docs_mentor_DB      # Имя БД
+      POSTGRES_USER: docs_user      # Пользователь
+      POSTGRES_PASSWORD: docs_pass  # Пароль
+    ports:
+      - "5432:5432"                 # Хост:контейнер
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Сохраняем данные между перезапусками
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: docs_mentor_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
