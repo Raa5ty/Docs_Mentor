@@ -8,58 +8,63 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 **Архитектура проекта:**
 
 - **Блок 1 (завершён):** Django + DRF + JWT — пользователи, API, модели.
-- **Блок 2 (планируется):** Celery + парсинг + эмбеддинги + PGVector.
+- **Блок 2 (завершён): **Celery + парсинг + разбивка на чанки + PGVector.
 - **Блок 3 (планируется):** FastAPI + RAG-чат + LLM.
 - **Блок 4 (планируется):** Фронтенд + полировка + безопасность.
 
 ---
 
-## Технологии (Блок 1)
+## Технологии (Блоки 1 и 2)
 
-| Компонент                         | Технология                            |
-| ------------------------------------------ | ----------------------------------------------- |
-| Язык                                   | Python 3.12                                     |
-| Фреймворк                         | Django 6.x                                      |
-| API                                        | Django REST Framework (DRF)                     |
-| Аутентификация               | JWT (SimpleJWT) + Session (для тестов) |
-| База данных                      | PostgreSQL                                      |
-| Кеш/брокер (подготовка) | Redis (клиент)                            |
-| Менеджер зависимостей  | uv                                              |
+| Компонент                        | Технология        |
+| ----------------------------------------- | --------------------------- |
+| Язык                                  | Python 3.12                 |
+| Фреймворк                        | Django 6.x                  |
+| API                                       | Django REST Framework (DRF) |
+| Аутентификация              | JWT (SimpleJWT)             |
+| База данных                     | PostgreSQL + pgvector       |
+| Брокер задач                   | Redis                       |
+| Фоновые задачи               | Celery                      |
+| Контейнеризация            | Docker / Docker Compose     |
+| Парсинг                            | BeautifulSoup4, requests    |
+| Токенизация                    | tiktoken (cl100k_base)      |
+| Менеджер зависимостей | uv                          |
 
 ---
 
-## Модели данных (Блок 1)
+## Модели данных
 
 ### User (`users_app`)
 
-| Поле                                    | Тип                       | Описание                |
-| ------------------------------------------- | ---------------------------- | ------------------------------- |
-| `id`                                      | BigAutoField                 | Первичный ключ     |
-| `email`                                   | EmailField (unique)          | Логин для входа    |
-| `username`                                | CharField (unique, optional) | Отображаемое имя |
-| `is_staff`,`is_active`,`is_superuser` | Boolean                      | Права доступа       |
-| `date_joined`,`last_login`              | DateTime                     | Даты                        |
+| Поле                                      | Тип                       | Описание                |
+| --------------------------------------------- | ---------------------------- | ------------------------------- |
+| `id`                                        | BigAutoField                 | Первичный ключ     |
+| `email`                                     | EmailField (unique)          | Логин для входа    |
+| `username`                                  | CharField (unique, optional) | Отображаемое имя |
+| `is_staff`, `is_active`, `is_superuser` | Boolean                      | Права доступа       |
+| `date_joined`, `last_login`               | DateTime                     | Даты                        |
 
 ### KnowledgeBase (`knowledge_bases_app`)
 
-| Поле                      | Тип              | Описание                           |
-| ----------------------------- | ------------------- | ------------------------------------------ |
-| `name`                      | CharField           | Название базы знаний     |
-| `source_url`                | URLField            | Ссылка на документацию |
-| `status`                    | CharField (choices) | pending / parsing / ready / failed         |
-| `owner`                     | FK(User)            | Владелец                           |
-| `created_at`,`updated_at` | DateTime            | Даты                                   |
+| Поле                       | Тип               | Описание                                           |
+| ------------------------------ | -------------------- | ---------------------------------------------------------- |
+| `name`                       | CharField            | Название базы знаний                     |
+| `source_url`                 | URLField             | Ссылка на документацию                 |
+| `status`                     | CharField (choices)  | pending / parsing / ready / failed                         |
+| `error_message`              | TextField (nullable) | Сообщение об ошибке при неудаче |
+| `owner`                      | FK(User)             | Владелец                                           |
+| `created_at`, `updated_at` | DateTime             | Даты                                                   |
 
 ### Chat (`knowledge_bases_app`)
 
-| Поле                      | Тип            | Описание                                                            |
-| ----------------------------- | ----------------- | --------------------------------------------------------------------------- |
-| `name`                      | CharField         | Название чата                                                   |
-| `knowledge_base`            | FK(KnowledgeBase) | Родительская БЗ                                               |
-| `system_prompt`             | TextField         | Промпт для AI                                                      |
-| `model_name`                | CharField         | Модель LLM (по умолчанию gpt-3.5-turbo)                    |
-| `top_k`                     | IntegerField      | Кол-во релевантных блоков (по умолчанию 5) |
-| `created_at`,`updated_at` | DateTime          | Даты                                                                    |
+| Поле                       | Тип            | Описание                                                            |
+| ------------------------------ | ----------------- | --------------------------------------------------------------------------- |
+| `name`                       | CharField         | Название чата                                                   |
+| `knowledge_base`             | FK(KnowledgeBase) | Родительская БЗ                                               |
+| `system_prompt`              | TextField         | Промпт для AI                                                      |
+| `model_name`                 | CharField         | Модель LLM (по умолчанию gpt-3.5-turbo)                    |
+| `top_k`                      | IntegerField      | Кол-во релевантных блоков (по умолчанию 5) |
+| `created_at`, `updated_at` | DateTime          | Даты                                                                    |
 
 ### Message (`knowledge_bases_app`)
 
@@ -70,7 +75,20 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 | `content`    | TextField           | Текст сообщения   |
 | `created_at` | DateTime            | Дата создания       |
 
-## API Endpoints (Блок 1)
+### DocumentChunk (`knowledge_bases_app`) — НОВОЕ В БЛОКЕ 2
+
+| Поле           | Тип            | Описание                                                      |
+| ------------------ | ----------------- | --------------------------------------------------------------------- |
+| `knowledge_base` | FK(KnowledgeBase) | Родительская БЗ                                         |
+| `chunk_text`     | TextField         | Текст чанка                                                 |
+| `embedding`      | VectorField(1536) | Векторное представление (пока null)         |
+| `source_url`     | URLField          | URL источника                                                |
+| `metadata`       | JSONField         | Метаданные (заголовок, индекс, секция) |
+| `created_at`     | DateTime          | Дата создания                                             |
+
+---
+
+## API Endpoints
 
 ### Аутентификация (`/api/auth/`)
 
@@ -82,13 +100,15 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 
 ### Базы знаний (`/api/knowledge-bases/`)
 
-| Метод | Эндпоинт | Описание                                            |
-| ---------- | ---------------- | ----------------------------------------------------------- |
-| GET        | `/`            | Список БЗ текущего пользователя |
-| POST       | `/`            | Создание новой БЗ                            |
-| GET        | `/{id}/`       | Детали БЗ                                           |
-| PUT/PATCH  | `/{id}/`       | Обновление БЗ                                   |
-| DELETE     | `/{id}/`       | Удаление БЗ                                       |
+| Метод | Эндпоинт  | Описание                                               |
+| ---------- | ----------------- | -------------------------------------------------------------- |
+| GET        | `/`             | Список БЗ текущего пользователя    |
+| POST       | `/`             | Создание новой БЗ                               |
+| GET        | `/{id}/`        | Детали БЗ                                              |
+| GET        | `/{id}/status/` | Статус БЗ (кол-во страниц и чанков) |
+| POST       | `/{id}/search/` | Поиск по чанкам (без LLM)                      |
+| PUT/PATCH  | `/{id}/`        | Обновление БЗ                                      |
+| DELETE     | `/{id}/`        | Удаление БЗ                                          |
 
 ### Чаты (`/api/chats/`)
 
@@ -119,49 +139,129 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 
 ```
 docs_mentor/
-├── docs_mentor/                 # Основной конфиг Django
-│   ├── settings.py
+├── docker-compose.yml           # PostgreSQL и Redis
+├── docs_mentor/
+│   ├── settings.py              # Настройки Django + Celery + логирование
 │   └── urls.py
 ├── users_app/                   # Кастомная модель User + JWT
-│   ├── models.py
+├── knowledge_bases_app/
+│   ├── models.py                # KnowledgeBase, Chat, Message, DocumentChunk
 │   ├── serializers.py
-│   ├── views.py
-│   └── urls.py
-├── knowledge_bases_app/         # KnowledgeBase, Chat, Message + CRUD API
-│   ├── models.py
-│   ├── serializers.py
-│   ├── views.py
-│   └── urls.py
+│   ├── views.py                 # API (CRUD + status + search)
+│   ├── urls.py
+│   ├── tasks.py                 # Celery-задачи
+│   ├── signals.py               # Автозапуск задачи при создании KB
+│   ├── chunking.py              # Разбивка текста на чанки
+│   └── parsers/
+│       ├── base.py              # Базовый класс парсера
+│       ├── mkdocs_parser.py     # Парсер для MkDocs
+│       └── universal_parser.py  # Универсальный парсер
+├── logs/
+│   └── docs_mentor.log          # Лог-файл
 ├── manage.py
 ├── .env
 ├── pyproject.toml
 └── uv.lock
 ```
 
-## Проверено и работает
+## Статусы KnowledgeBase
 
-* Регистрация и логин (JWT)
-* Создание KnowledgeBase → Chat → Message
-* API возвращает только объекты текущего пользователя
-* Админка работает с кастомными моделями
-* Сессионная аутентификация для браузерного тестирования
-
-## Планы на Блок 2
-
-* Celery + Redis (фоновая задача парсинга)
-* Парсеры для MkDocs (FastAPI) и Sphinx (PyTorch)
-* Разбивка на чанки (500-1000 токенов)
-* Генерация эмбеддингов (OpenAI или локально)
-* PGVector (векторное хранилище)
-* Статусы библиотеки: `pending` → `parsing` → `ready` / `failed`
+| Статус | Описание                                                                             |
+| ------------ | -------------------------------------------------------------------------------------------- |
+| `pending`  | Создана, ожидает начала парсинга                                 |
+| `parsing`  | Идёт парсинг и обработка документации                       |
+| `ready`    | Парсинг завершён, чанки сохранены                               |
+| `failed`   | Ошибка при парсинге (текст ошибки в поле `error_message`) |
 
 ---
 
-## Идеи для развития (зафиксировано)
+## Архитектура и инфраструктура (Блок 2)
 
-* **Публичные KnowledgeBase** — возможность делиться готовыми БЗ и клонировать их
-* **Загрузка PDF** — создание БЗ из собственных документов
-* **Поддержка локальных LLM** (Ollama, LM Studio)
+### Запуск сервисов через Docker Compose
+
+```yaml
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+```
+
+### Фоновые задачи (Celery)
+
+При создании KnowledgeBase автоматически запускается Celery-задача:
+
+1. Парсинг документации (MkDocsParser или UniversalParser)
+2. Разбивка на чанки (правило: <1500 токенов — 1 чанк, иначе чанки по 800 токенов с overlap 150)
+3. Сохранение чанков в PGVector
+4. Обновление статуса: `pending` → `parsing` → `ready` / `failed`
+
+### Парсеры
+
+| Парсер        | Для каких сайтов           | Автосбор страниц                           |
+| ------------------- | ---------------------------------------- | --------------------------------------------------------- |
+| `MkDocsParser`    | FastAPI, MkDocs, Material for MkDocs     | ✅ Да                                                   |
+| `UniversalParser` | Любые сайты (запасной) | ❌ Нет (ручной список)                     |
+| `SphinxParser`    | PyTorch, Python docs                     | ⏸ Заморожен (требует доработки) |
+
+### Логирование
+
+* Все события записываются в файл `logs/docs_mentor.log`
+* Также выводятся в консоль (терминалы Django и Celery)
+
+---
+
+## Проверено и работает
+
+### Блок 1
+
+* ✅ Регистрация и логин (JWT)
+* ✅ CRUD для KnowledgeBase, Chat, Message
+* ✅ Права доступа (только свои объекты)
+
+### Блок 2
+
+* ✅ PostgreSQL + pgvector в Docker
+* ✅ Redis в Docker
+* ✅ Celery (на Windows с `--pool=solo`)
+* ✅ Парсер MkDocs (FastAPI: 151 страница)
+* ✅ Разбивка на чанки (943 чанка для FastAPI)
+* ✅ Сохранение чанков в PGVector
+* ✅ API статуса (`/status/`)
+* ✅ API поиска (`/search/`) — заглушка (без эмбеддингов)
+* ✅ Логирование и обработка ошибок
+* ✅ Автоматический запуск задачи при создании KB
+
+---
+
+## Планы на Блок 3
+
+* FastAPI сервис для RAG-чата
+* Интеграция с OpenAI API (LLM + эмбеддинги)
+* Стриминг ответов
+* Саммаризация контекста (опционально)
+* Поддержка локальных LLM (Ollama)
+
+---
+
+## Планы на Блок 4
+
+* Фронтенд (минимальный UI)
+* Перевод запросов/ответов
+* Документация и инструкция по запуску
+
+---
+
+## Идеи для развития
+
+* Публичные KnowledgeBase — возможность делиться готовыми БЗ
+* Поддержка локальных LLM (Ollama, LM Studio)
+
+
 
 ---
 
@@ -172,4 +272,4 @@ docs_mentor/
 * Руководитель: [тимлид]
 
 
-*Последнее обновление: 31 мая 2026 г*
+*Последнее обновление: 03 июня 2026 г*

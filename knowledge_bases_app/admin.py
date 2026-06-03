@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import KnowledgeBase, Chat, Message
+from .models import KnowledgeBase, Chat, Message, DocumentChunk
 
 
 class MessageInline(admin.TabularInline):
@@ -44,3 +44,10 @@ class MessageAdmin(admin.ModelAdmin):
     def content_preview(self, obj):
         return obj.content[:100] + '...' if len(obj.content) > 100 else obj.content
     content_preview.short_description = 'Содержание (превью)'
+
+@admin.register(DocumentChunk)
+class DocumentChunkAdmin(admin.ModelAdmin):
+    list_display = ['id', 'knowledge_base', 'source_url', 'created_at']
+    list_filter = ['knowledge_base']
+    search_fields = ['chunk_text']
+    readonly_fields = ['created_at']
