@@ -1,4 +1,4 @@
-# Docs Mentor Platform — Блок 1 (Фундамент)
+# Docs Mentor Platform
 
 ## Общее описание
 
@@ -8,27 +8,32 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 **Архитектура проекта:**
 
 - **Блок 1 (завершён):** Django + DRF + JWT — пользователи, API, модели.
-- **Блок 2 (завершён): **Celery + парсинг + разбивка на чанки + PGVector.
-- **Блок 3 (планируется):** FastAPI + RAG-чат + LLM.
+- **Блок 2 (завершён):** Celery + парсинг + разбивка на чанки + PGVector.
+- **Блок 3 (завершён):** FastAPI + RAG-чат + LLM + стриминг.
+- **Блок 3+ (планируется):** Поддержка нескольких LLM провайдеров.
 - **Блок 4 (планируется):** Фронтенд + полировка + безопасность.
 
 ---
 
-## Технологии (Блоки 1 и 2)
+## Технологии (Блоки 1, 2 и 3)
 
-| Компонент                        | Технология        |
-| ----------------------------------------- | --------------------------- |
-| Язык                                  | Python 3.12                 |
-| Фреймворк                        | Django 6.x                  |
-| API                                       | Django REST Framework (DRF) |
-| Аутентификация              | JWT (SimpleJWT)             |
-| База данных                     | PostgreSQL + pgvector       |
-| Брокер задач                   | Redis                       |
-| Фоновые задачи               | Celery                      |
-| Контейнеризация            | Docker / Docker Compose     |
-| Парсинг                            | BeautifulSoup4, requests    |
-| Токенизация                    | tiktoken (cl100k_base)      |
-| Менеджер зависимостей | uv                          |
+| Компонент                        | Технология                                |
+| ----------------------------------------- | --------------------------------------------------- |
+| Язык                                  | Python 3.12                                         |
+| Фреймворк                        | Django 6.x                                          |
+| API                                       | Django REST Framework (DRF)                         |
+| Аутентификация              | JWT (SimpleJWT)                                     |
+| База данных                     | PostgreSQL + pgvector                               |
+| Брокер задач                   | Redis                                               |
+| Фоновые задачи               | Celery                                              |
+| Контейнеризация            | Docker / Docker Compose                             |
+| Парсинг                            | BeautifulSoup4, requests                            |
+| Токенизация                    | tiktoken (cl100k_base)                              |
+| Менеджер зависимостей | uv                                                  |
+| **RAG-сервис**                | **FastAPI**                                   |
+| **Векторный поиск**   | **pgvector (оператор <=>)**           |
+| **LLM интеграция**        | **OpenAI-совместимый API (Gonka)** |
+| **Стриминг**                | **SSE (sse-starlette)**                       |
 
 ---
 
@@ -129,35 +134,55 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 | GET        | `/{id}/`       | Детали сообщения                                     |
 | DELETE     | `/{id}/`       | Удаление сообщения                                 |
 
+### RAG-чат (FastAPI, порт 8001)
+
+| Метод | Эндпоинт               | Описание                                              |
+| ---------- | ------------------------------ | ------------------------------------------------------------- |
+| GET        | `/health`                    | Проверка состояния сервиса            |
+| POST       | `/search/{kb_id}`            | Поиск релевантных чанков (без LLM)   |
+| POST       | `/chat/{chat_id}/ask`        | Полный RAG-ответ (без стриминга)       |
+| POST       | `/chat/{chat_id}/ask/stream` | RAG-ответ с потоковой передачей (SSE) |
+
+---
+
+
+
 ## Права доступа (текущая логика)
 
 * Пользователь видит и управляет **только своими** KnowledgeBase, Chat, Message.
 * API требует JWT-токен в заголовке: `Authorization: Bearer <access_token>`.
+* FastAPI проверяет права через Django API.
 * Для тестирования через браузер добавлена `SessionAuthentication` (временное решение).
 
 ## Структура проекта
 
 ```
 docs_mentor/
-├── docker-compose.yml           # PostgreSQL и Redis
-├── docs_mentor/
-│   ├── settings.py              # Настройки Django + Celery + логирование
-│   └── urls.py
-├── users_app/                   # Кастомная модель User + JWT
-├── knowledge_bases_app/
-│   ├── models.py                # KnowledgeBase, Chat, Message, DocumentChunk
-│   ├── serializers.py
-│   ├── views.py                 # API (CRUD + status + search)
-│   ├── urls.py
-│   ├── tasks.py                 # Celery-задачи
-│   ├── signals.py               # Автозапуск задачи при создании KB
-│   ├── chunking.py              # Разбивка текста на чанки
-│   └── parsers/
-│       ├── base.py              # Базовый класс парсера
-│       ├── mkdocs_parser.py     # Парсер для MkDocs
-│       └── universal_parser.py  # Универсальный парсер
+├── docker-compose.yml 		# PostgreSQL и Redis
+├── docs_mentor/ 		# Django проект
+│ ├── settings.py
+│ └── urls.py
+├── users_app/ 			# Кастомная модель User + JWT
+├── knowledge_bases_app/ 	# Модели, API, парсинг, Celery
+│ ├── models.py
+│ ├── views.py
+│ ├── tasks.py
+│ ├── chunking.py
+│ └── parsers/
+├── rag_chat_service/ 		# FastAPI RAG-сервис (НОВЫЙ)
+│ ├── main.py
+│ ├── config.py
+│ ├── database.py
+│ ├── embeddings.py
+│ ├── routers/
+│ │ ├── health.py
+│ │ └── chat.py
+│ └── services/
+│ ├── django_client.py
+│ └── llm_client.py
 ├── logs/
-│   └── docs_mentor.log          # Лог-файл
+│ ├── docs_mentor.log 		# Логи Django
+│ └── rag_service.log 		# Логи FastAPI
 ├── manage.py
 ├── .env
 ├── pyproject.toml
@@ -236,32 +261,54 @@ services:
 * ✅ Логирование и обработка ошибок
 * ✅ Автоматический запуск задачи при создании KB
 
+## Блок 3. RAG-чат (завершён)
+
+**Реализовано:**
+
+* ✅ FastAPI сервис с асинхронными эндпоинтами
+* ✅ Векторный поиск в pgvector (оператор `<=>`)
+* ✅ Интеграция с Django API (настройки чата, сохранение сообщений)
+* ✅ Вызов LLM через OpenAI-совместимый API (Gonka)
+* ✅ Потоковая передача ответов (SSE)
+* ✅ История чата в контексте
+* ✅ Логирование и обработка ошибок
+* ✅ JWT-авторизация
+
+**Эндпоинты:**
+
+* `POST /chat/{chat_id}/ask` — обычный RAG-ответ
+* `POST /chat/{chat_id}/ask/stream` — потоковый RAG-ответ (SSE)
+
 ---
 
-## Планы на Блок 3
+## Блок 3+ (планируется)
 
-* FastAPI сервис для RAG-чата
-* Интеграция с OpenAI API (LLM + эмбеддинги)
-* Стриминг ответов
-* Саммаризация контекста (опционально)
-* Поддержка локальных LLM (Ollama)
+**Поддержка нескольких LLM провайдеров:**
+
+* Модель `LLMProvider` в Django (название, base_url, api_key, дефолтные настройки)
+* Привязка провайдера к чату с возможностью переопределения модели и температуры
+* Шифрование API-ключей (`django-cryptography`)
+* Фабрика провайдеров в FastAPI (OpenAI-совместимые + Ollama)
+* Админка для управления провайдерами
 
 ---
 
-## Планы на Блок 4
+## Блок 4 (планируется)
 
-* Фронтенд (минимальный UI)
-* Перевод запросов/ответов
+* Минимальный веб-интерфейс (чат)
+* Подключение к SSE-стримингу
+* Настройка CORS и безопасности
+* Docker-упаковка FastAPI
 * Документация и инструкция по запуску
 
 ---
 
 ## Идеи для развития
 
+* Поддержка нескольких LLM провайдеров (OpenAI, OpenRouter, Ollama)
 * Публичные KnowledgeBase — возможность делиться готовыми БЗ
-* Поддержка локальных LLM (Ollama, LM Studio)
-
-
+* Саммаризация контекста для длинных диалогов
+* Перевод запросов/ответов
 
 ---
 
@@ -271,5 +318,4 @@ services:
 * Разработчик: [Raa5ty]
 * Руководитель: [тимлид]
 
-
-*Последнее обновление: 03 июня 2026 г*
+*Последнее обновление: *07 июня 2026 г.**

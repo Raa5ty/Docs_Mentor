@@ -1,0 +1,7 @@
+### Стриминг RAG-ответа
+POST http://localhost:8001/chat/2/ask/stream
+Content-Type: application/json
+
+{
+    "message": "Как создать маршрут в FastAPI?"
+}

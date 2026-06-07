@@ -35,7 +35,7 @@ class KnowledgeBase(models.Model):
         null=True, 
         verbose_name="Сообщение об ошибке"
     )
-    
+    # Реализованно непосредственно в FastAPI, но может пригодиться для админки Django
     def search_chunks(self, query_embedding: list, top_k: int = 5):
         """
         Поиск релевантных чанков по вектору запроса.
@@ -125,7 +125,7 @@ class Chat(models.Model):
     
     # Настройки AI-бота
     system_prompt = models.TextField(
-        default="You are a helpful assistant that answers questions based on the provided documentation. Be concise, accurate, and cite sources when possible.",
+        default="Ты помощник, который отвечает на вопросы на основе документации. Отвечай на русском языке, будь лаконичным и указывай источники.",
         verbose_name='Системный промпт'
     )
     model_name = models.CharField(

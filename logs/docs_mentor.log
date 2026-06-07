@@ -1,0 +1,20 @@
+INFO 2026-06-04 17:55:52,921 autoreload 4272 31004 Watching for file changes with StatReloader
+INFO 2026-06-06 15:14:43,784 autoreload 22360 21528 Watching for file changes with StatReloader
+WARNING 2026-06-06 15:15:16,107 log 22360 7728 Method Not Allowed: /api/auth/login/
+WARNING 2026-06-06 15:32:55,787 log 22360 25488 Unauthorized: /api/chats/1/
+WARNING 2026-06-06 15:35:44,831 log 22360 15472 Method Not Allowed: /api/auth/login/
+WARNING 2026-06-06 16:49:28,352 log 22360 15004 Unauthorized: /api/chats/2/
+INFO 2026-06-06 20:47:39,520 autoreload 34424 25296 Watching for file changes with StatReloader
+INFO 2026-06-06 20:48:07,655 autoreload 8004 5012 Watching for file changes with StatReloader
+WARNING 2026-06-06 20:49:02,620 log 8004 30488 Method Not Allowed: /api/auth/login/
+INFO 2026-06-06 21:28:04,236 autoreload 8004 5012 C:\Users\rusma\Pet_Projects\docs_mentor\knowledge_bases_app\models.py changed, reloading.
+INFO 2026-06-06 21:28:05,256 autoreload 26104 35388 Watching for file changes with StatReloader
+INFO 2026-06-07 15:01:21,695 autoreload 33264 7584 Watching for file changes with StatReloader
+WARNING 2026-06-07 15:02:09,548 log 33264 27096 Method Not Allowed: /api/auth/login/
+WARNING 2026-06-07 15:02:18,894 log 33264 27096 Not Found: /
+WARNING 2026-06-07 15:02:24,686 log 33264 27096 Method Not Allowed: /api/auth/login/
+WARNING 2026-06-07 15:02:25,780 log 33264 27096 Method Not Allowed: /api/auth/login/
+WARNING 2026-06-07 15:29:35,576 log 33264 31104 Unauthorized: /api/chats/2/
+INFO 2026-06-07 15:35:21,314 autoreload 33264 7584 C:\Users\rusma\Pet_Projects\docs_mentor\docs_mentor\settings.py changed, reloading.
+INFO 2026-06-07 15:35:22,387 autoreload 34740 9224 Watching for file changes with StatReloader
+INFO 2026-06-07 15:35:48,256 autoreload 35296 19996 Watching for file changes with StatReloader
