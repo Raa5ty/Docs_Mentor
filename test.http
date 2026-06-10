@@ -1,3 +1,5 @@
+@jwt_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgxMTczNzAwLCJpYXQiOjE3ODEwODczMDAsImp0aSI6ImJhZThhYzExYWU3YzQxY2Q5YTU5NTZmZjEyOGY3NGFkIiwidXNlcl9pZCI6IjEifQ.-rgvx8ju491dsvKxBRdciXCmbXo-F93Az583Gii2vnI
+
 ### Стриминг RAG-ответа
 POST http://localhost:8001/chat/2/ask/stream
 Content-Type: application/json
@@ -5,3 +7,44 @@ Content-Type: application/json
 {
     "message": "Как создать маршрут в FastAPI?"
 }
+
+# Полчение токена доступа
+POST http://localhost:8000/api/auth/login/
+Content-Type: application/json
+
+{
+    "email": "rusman482@gmail.com",
+    "password": "adminroot1234"
+}
+
+### Список провайдеров
+GET http://localhost:8000/api/llm/providers/
+Authorization: Bearer {{jwt_token}}
+
+
+GET http://localhost:8000/api/llm/models/3/
+Authorization: Bearer {{jwt_token}}
+
+### Список моделей провайдера (например, Gonka с id=1)
+GET http://localhost:8000/api/llm/providers/4/models/
+Authorization: Bearer {{jwt_token}}
+
+### Список чатов пользователя
+GET http://localhost:8000/api/llm/chats/
+Authorization: Bearer {{jwt_token}}
+
+### Создать чат
+POST http://localhost:8000/api/llm/chats/
+Authorization: Bearer {{jwt_token}}
+Content-Type: application/json
+
+{
+    "name": "Тестовый чат",
+    "knowledge_base": 1,
+    "llm_model": 1,
+    "top_k": 5
+}
+
+### Список сообщений
+GET http://localhost:8000/api/llm/messages/
+Authorization: Bearer {{jwt_token}}

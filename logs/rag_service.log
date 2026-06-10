@@ -2257,3 +2257,358 @@ For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/St
 2026-06-07 15:46:47 - DEBUG - httpcore.connection - close.complete
 2026-06-07 15:46:47 - DEBUG - sse_starlette.sse - chunk: b'event: end\r\ndata: [DONE]\r\n\r\n'
 2026-06-07 15:46:47 - DEBUG - sse_starlette.sse - Got event: http.disconnect. Stop streaming.
+2026-06-10 21:11:08 - INFO - root - Logging configured successfully
+2026-06-10 21:11:08 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:11:08 - INFO - root - Logging configured successfully
+2026-06-10 21:11:08 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:16:15 - INFO - rag_chat_service.routers.chat - Ask request: chat_id=1, message='Как создать маршрут в FastAPI?...'
+2026-06-10 21:16:15 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:16:15 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000018F19E2A1B0>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:16:15 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, PUT, PATCH, DELETE, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'277'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:16:15 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/chats/1/ "HTTP/1.1 200 OK"
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:16:15 - INFO - rag_chat_service.services.django_client - Chat 1 settings retrieved
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:16:15 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'489'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:16:15 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/providers/3/ "HTTP/1.1 200 OK"
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Date', b'Wed, 10 Jun 2026 17:16:15 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'50'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:16:15 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/providers/None/ "HTTP/1.1 404 Not Found"
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:16:15 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:16:15 - ERROR - rag_chat_service.services.django_client - Failed to get provider details for None
+2026-06-10 21:16:15 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:16:15 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:19:56 - INFO - root - Logging configured successfully
+2026-06-10 21:19:56 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:21:08 - INFO - root - Logging configured successfully
+2026-06-10 21:21:08 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:21:45 - INFO - root - Logging configured successfully
+2026-06-10 21:21:45 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:21:47 - INFO - root - Logging configured successfully
+2026-06-10 21:21:47 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:22:20 - INFO - root - Logging configured successfully
+2026-06-10 21:22:20 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:22:20 - INFO - root - Logging configured successfully
+2026-06-10 21:22:20 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:22:46 - INFO - rag_chat_service.routers.chat - Ask request: chat_id=1, message='Как создать маршрут в FastAPI?...'
+2026-06-10 21:22:46 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:22:46 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x000001D30B7C1400>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:22:46 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, PUT, PATCH, DELETE, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'277'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:22:46 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/chats/1/ "HTTP/1.1 200 OK"
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:22:46 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'127'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:22:46 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/models/3/ "HTTP/1.1 200 OK"
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 404, b'Not Found', [(b'Date', b'Wed, 10 Jun 2026 17:22:46 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'50'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:22:46 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/providers/None/ "HTTP/1.1 404 Not Found"
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:22:46 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:22:46 - ERROR - rag_chat_service.services.django_client - Failed to get provider None
+2026-06-10 21:22:46 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:22:46 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:27:32 - INFO - root - Logging configured successfully
+2026-06-10 21:27:32 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:30:34 - INFO - rag_chat_service.routers.chat - Ask request: chat_id=1, message='Как создать маршрут в FastAPI?...'
+2026-06-10 21:30:34 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:30:34 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020658C52000>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:30:34 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, PUT, PATCH, DELETE, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'277'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:34 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/chats/1/ "HTTP/1.1 200 OK"
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:30:34 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'166'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:34 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/models/3/ "HTTP/1.1 200 OK"
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:30:34 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'528'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:34 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/providers/3/ "HTTP/1.1 200 OK"
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:34 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:30:35 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'175'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:35 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/user-api-keys/?provider=3 "HTTP/1.1 200 OK"
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:30:35 - INFO - rag_chat_service.routers.chat - Chat settings: top_k=5, provider=gonka
+2026-06-10 21:30:35 - WARNING - rag_chat_service.embeddings - No OpenAI API key found. Using fake embeddings (random vector).
+2026-06-10 21:30:35 - INFO - rag_chat_service.database - search_chunks called with kb_id=1, top_k=5
+2026-06-10 21:30:35 - INFO - rag_chat_service.database - Embedding string length: 30386
+2026-06-10 21:30:35 - INFO - rag_chat_service.database - Acquired connection, executing query...
+2026-06-10 21:30:35 - INFO - rag_chat_service.database - Query executed, got 5 rows
+2026-06-10 21:30:35 - INFO - rag_chat_service.routers.chat - Found 5 relevant chunks
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020659066B40>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:30:35 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'2'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:35 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/messages/?chat=1 "HTTP/1.1 200 OK"
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:35 - INFO - rag_chat_service.services.django_client - Retrieved 0 messages from chat history
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:30:35 - INFO - rag_chat_service.routers.chat - Retrieved 0 messages from chat history
+2026-06-10 21:30:35 - WARNING - rag_chat_service.services.provider_factory - No API key provided for gonka
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - connect_tcp.started host='hskyauefqcgbvgvxkluj.supabase.co' port=443 local_address=None timeout=60.0 socket_options=None
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020659067C80>
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - start_tls.started ssl_context=<ssl.SSLContext object at 0x000002065907C2D0> server_hostname='hskyauefqcgbvgvxkluj.supabase.co' timeout=60.0
+2026-06-10 21:30:35 - DEBUG - httpcore.connection - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020659067BC0>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:35 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 401, b'Unauthorized', [(b'Date', b'Wed, 10 Jun 2026 17:30:36 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'47'), (b'Connection', b'keep-alive'), (b'CF-Ray', b'a09a1ad89d1d7a60-WAW'), (b'CF-Cache-Status', b'DYNAMIC'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'Vary', b'Accept-Encoding'), (b'access-control-allow-headers', b'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version'), (b'access-control-expose-headers', b'x-balance-cents, x-balance-usd, x-cost-cents, x-cost-usd, x-prompt-tokens, x-completion-tokens, x-total-tokens, x-model, x-model-original, x-model-resolved, x-model-substituted, x-model-notice, x-web-search-used, x-web-search-query, x-web-search-sources-count, x-web-search-cost-cents'), (b'endpoint-load-metrics', b'application_utilization:11,named_metrics.queue_depth:11'), (b'sb-gateway-version', b'1'), (b'sb-project-ref', b'hskyauefqcgbvgvxkluj'), (b'sb-request-id', b'019eb296-037d-7aa8-9781-e37519657cee'), (b'x-deno-execution-id', b'4ce0398d-8d49-464d-929e-01512f969be8'), (b'x-sb-edge-region', b'eu-central-1'), (b'x-served-by', b'supabase-edge-runtime'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'set-cookie', b'__cf_bm=vWzL5r_olsCRktatpbWKJ9h5SMvIemc8K.3k7Hmcn_M-1781112636.2602637-1.0.1.1-Qk6gmG_9hnpFRNbLNpwDxKRjGFS16GbQEO0TjSUpDxUD7fkYWlJRzdh883IkUi5W7CcL1iBEh6zVcWqcEAfAMLl3Q6VeFQ8WbK1rv8TEyeHdH11TWLACwCRaXKK.VvRe; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Wed, 10 Jun 2026 18:00:36 GMT'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-06-10 21:30:36 - INFO - httpx - HTTP Request: POST https://hskyauefqcgbvgvxkluj.supabase.co/functions/v1/gonka/chat/completions "HTTP/1.1 401 Unauthorized"
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:30:36 - ERROR - rag_chat_service.services.provider_factory - OpenAICompatibleProvider call failed: Client error '401 Unauthorized' for url 'https://hskyauefqcgbvgvxkluj.supabase.co/functions/v1/gonka/chat/completions'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2026-06-10 21:30:36 - INFO - rag_chat_service.routers.chat - LLM answer received, length: 230
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x00000206590656A0>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 201, b'Created', [(b'Date', b'Wed, 10 Jun 2026 17:30:36 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'172'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:36 - INFO - httpx - HTTP Request: POST http://localhost:8000/api/llm/messages/ "HTTP/1.1 201 Created"
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:36 - INFO - rag_chat_service.services.django_client - Message saved: role=user
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020657703F50>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 201, b'Created', [(b'Date', b'Wed, 10 Jun 2026 17:30:36 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'375'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:30:36 - INFO - httpx - HTTP Request: POST http://localhost:8000/api/llm/messages/ "HTTP/1.1 201 Created"
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:30:36 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:30:36 - INFO - rag_chat_service.services.django_client - Message saved: role=assistant
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:30:36 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:33:25 - INFO - root - Logging configured successfully
+2026-06-10 21:33:25 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:34:25 - INFO - root - Logging configured successfully
+2026-06-10 21:34:25 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:35:43 - INFO - root - Logging configured successfully
+2026-06-10 21:35:43 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:35:43 - INFO - root - Logging configured successfully
+2026-06-10 21:35:43 - INFO - root - Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+2026-06-10 21:35:52 - INFO - rag_chat_service.routers.chat - Ask request: chat_id=1, message='Как создать маршрут в FastAPI?...'
+2026-06-10 21:35:52 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:35:52 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020E044047D0>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:35:52 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, PUT, PATCH, DELETE, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'277'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:35:52 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/chats/1/ "HTTP/1.1 200 OK"
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:35:52 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'166'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:35:52 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/models/3/ "HTTP/1.1 200 OK"
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:35:52 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'528'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:35:52 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/providers/3/ "HTTP/1.1 200 OK"
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:35:52 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'335'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:35:52 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/user-api-keys/?provider=3 "HTTP/1.1 200 OK"
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:35:52 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:35:52 - INFO - rag_chat_service.services.django_client - API key retrieved for provider 3
+2026-06-10 21:35:52 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:35:52 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:35:52 - INFO - rag_chat_service.routers.chat - Chat settings: top_k=5, provider=gonka
+2026-06-10 21:35:52 - WARNING - rag_chat_service.embeddings - No OpenAI API key found. Using fake embeddings (random vector).
+2026-06-10 21:35:52 - INFO - rag_chat_service.database - search_chunks called with kb_id=1, top_k=5
+2026-06-10 21:35:52 - INFO - rag_chat_service.database - Embedding string length: 30378
+2026-06-10 21:35:52 - INFO - rag_chat_service.database - Acquired connection, executing query...
+2026-06-10 21:35:53 - INFO - rag_chat_service.database - Query executed, got 5 rows
+2026-06-10 21:35:53 - INFO - rag_chat_service.routers.chat - Found 5 relevant chunks
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020E047E2C00>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'GET']>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'GET']>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:35:53 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'550'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:35:53 - INFO - httpx - HTTP Request: GET http://localhost:8000/api/llm/messages/?chat=1 "HTTP/1.1 200 OK"
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'GET']>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:35:53 - INFO - rag_chat_service.services.django_client - Retrieved 2 messages from chat history
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:35:53 - INFO - rag_chat_service.routers.chat - Retrieved 2 messages from chat history
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - connect_tcp.started host='hskyauefqcgbvgvxkluj.supabase.co' port=443 local_address=None timeout=60.0 socket_options=None
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020E0421DCD0>
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - start_tls.started ssl_context=<ssl.SSLContext object at 0x0000020E047FC4D0> server_hostname='hskyauefqcgbvgvxkluj.supabase.co' timeout=60.0
+2026-06-10 21:35:53 - DEBUG - httpcore.connection - start_tls.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020E04405370>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:35:53 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Wed, 10 Jun 2026 17:36:02 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'1699'), (b'Connection', b'keep-alive'), (b'CF-Ray', b'a09a229bd92e34e0-WAW'), (b'CF-Cache-Status', b'DYNAMIC'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip'), (b'Server', b'cloudflare'), (b'Vary', b'Accept-Encoding'), (b'access-control-allow-headers', b'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version'), (b'access-control-expose-headers', b'x-balance-cents, x-balance-usd, x-cost-cents, x-cost-usd, x-prompt-tokens, x-completion-tokens, x-total-tokens, x-model, x-model-original, x-model-resolved, x-model-substituted, x-model-notice, x-web-search-used, x-web-search-query, x-web-search-sources-count, x-web-search-cost-cents'), (b'endpoint-load-metrics', b'application_utilization:23,named_metrics.queue_depth:23'), (b'sb-gateway-version', b'1'), (b'sb-project-ref', b'hskyauefqcgbvgvxkluj'), (b'sb-request-id', b'019eb29a-dd7d-7088-9bf4-8e95f5842825'), (b'x-balance-cents', b'9.969378'), (b'x-balance-usd', b'0.09969378'), (b'x-completion-tokens', b'427'), (b'x-cost-cents', b'0.002238'), (b'x-cost-usd', b'0.00002238'), (b'x-deno-execution-id', b'8eb84c3a-4ec6-4ead-b586-b0bf765ada11'), (b'x-model', b'Qwen/Qwen3-235B-A22B-Instruct-2507-FP8'), (b'x-prompt-tokens', b'1065'), (b'x-sb-edge-region', b'eu-central-1'), (b'x-served-by', b'supabase-edge-runtime'), (b'x-total-tokens', b'1492'), (b'Strict-Transport-Security', b'max-age=31536000; includeSubDomains; preload'), (b'set-cookie', b'__cf_bm=r2DU4l9oAQ3mEqhliSqQy7p2DwwcaWrUgh4WUQRgRE4-1781112954.2131057-1.0.1.1-9v2vhn.Ubl_5XH8v59.MBi7DtUTNZuQCd1bwkIqopbTqnfvnsqFgj0hKcujZ6sT51.hOOqSk2cRrpRjDuisxW5z4Z4TnYGiCSkfSXx30ejkHtlwO.6AtBWvBTcHhyH4e; HttpOnly; SameSite=None; Secure; Path=/; Domain=supabase.co; Expires=Wed, 10 Jun 2026 18:06:02 GMT'), (b'alt-svc', b'h3=":443"; ma=86400')])
+2026-06-10 21:36:02 - INFO - httpx - HTTP Request: POST https://hskyauefqcgbvgvxkluj.supabase.co/functions/v1/gonka/chat/completions "HTTP/1.1 200 OK"
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:36:02 - INFO - rag_chat_service.routers.chat - LLM answer received, length: 1488
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020E047E1BB0>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 201, b'Created', [(b'Date', b'Wed, 10 Jun 2026 17:36:02 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'172'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:36:02 - INFO - httpx - HTTP Request: POST http://localhost:8000/api/llm/messages/ "HTTP/1.1 201 Created"
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:36:02 - INFO - rag_chat_service.services.django_client - Message saved: role=user
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - close.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - connect_tcp.started host='localhost' port=8000 local_address=None timeout=10.0 socket_options=None
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - connect_tcp.complete return_value=<httpcore._backends.anyio.AnyIOStream object at 0x0000020E04254E30>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_headers.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_headers.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_body.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - send_request_body.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_headers.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_headers.complete return_value=(b'HTTP/1.1', 201, b'Created', [(b'Date', b'Wed, 10 Jun 2026 17:36:02 GMT'), (b'Server', b'WSGIServer/0.2 CPython/3.12.8'), (b'Content-Type', b'application/json'), (b'Vary', b'Accept'), (b'Allow', b'GET, POST, HEAD, OPTIONS'), (b'X-Frame-Options', b'DENY'), (b'Content-Length', b'2222'), (b'X-Content-Type-Options', b'nosniff'), (b'Referrer-Policy', b'same-origin'), (b'Cross-Origin-Opener-Policy', b'same-origin')])
+2026-06-10 21:36:02 - INFO - httpx - HTTP Request: POST http://localhost:8000/api/llm/messages/ "HTTP/1.1 201 Created"
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_body.started request=<Request [b'POST']>
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - receive_response_body.complete
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - response_closed.started
+2026-06-10 21:36:02 - DEBUG - httpcore.http11 - response_closed.complete
+2026-06-10 21:36:02 - INFO - rag_chat_service.services.django_client - Message saved: role=assistant
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - close.started
+2026-06-10 21:36:02 - DEBUG - httpcore.connection - close.complete

@@ -10,8 +10,8 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 - **Блок 1 (завершён):** Django + DRF + JWT — пользователи, API, модели.
 - **Блок 2 (завершён):** Celery + парсинг + разбивка на чанки + PGVector.
 - **Блок 3 (завершён):** FastAPI + RAG-чат + LLM + стриминг.
-- **Блок 3+ (планируется):** Поддержка нескольких LLM провайдеров.
-- **Блок 4 (планируется):** Фронтенд + полировка + безопасность.
+- **Блок 3+ (завершён):** **Поддержка нескольких LLM провайдеров, шифрование ключей.**
+- **Блок 4 (планируется):** Тесты + Фронтенд + полировка + безопасность.
 
 ---
 
@@ -34,6 +34,7 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 | **Векторный поиск**   | **pgvector (оператор <=>)**           |
 | **LLM интеграция**        | **OpenAI-совместимый API (Gonka)** |
 | **Стриминг**                | **SSE (sse-starlette)**                       |
+| Шифрование                      | django-cryptography                                 |
 
 ---
 
@@ -60,27 +61,7 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 | `owner`                      | FK(User)             | Владелец                                           |
 | `created_at`, `updated_at` | DateTime             | Даты                                                   |
 
-### Chat (`knowledge_bases_app`)
-
-| Поле                       | Тип            | Описание                                                            |
-| ------------------------------ | ----------------- | --------------------------------------------------------------------------- |
-| `name`                       | CharField         | Название чата                                                   |
-| `knowledge_base`             | FK(KnowledgeBase) | Родительская БЗ                                               |
-| `system_prompt`              | TextField         | Промпт для AI                                                      |
-| `model_name`                 | CharField         | Модель LLM (по умолчанию gpt-3.5-turbo)                    |
-| `top_k`                      | IntegerField      | Кол-во релевантных блоков (по умолчанию 5) |
-| `created_at`, `updated_at` | DateTime          | Даты                                                                    |
-
-### Message (`knowledge_bases_app`)
-
-| Поле       | Тип              | Описание                |
-| -------------- | ------------------- | ------------------------------- |
-| `chat`       | FK(Chat)            | Родительский чат |
-| `role`       | CharField (choices) | user / assistant                |
-| `content`    | TextField           | Текст сообщения   |
-| `created_at` | DateTime            | Дата создания       |
-
-### DocumentChunk (`knowledge_bases_app`) — НОВОЕ В БЛОКЕ 2
+### DocumentChunk (`knowledge_bases_app`)
 
 | Поле           | Тип            | Описание                                                      |
 | ------------------ | ----------------- | --------------------------------------------------------------------- |
@@ -90,6 +71,16 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 | `source_url`     | URLField          | URL источника                                                |
 | `metadata`       | JSONField         | Метаданные (заголовок, индекс, секция) |
 | `created_at`     | DateTime          | Дата создания                                             |
+
+### `llms_app models`
+
+| Модель    | Описание                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------- |
+| `LLMProvider` | Провайдер LLM (название, slug, base_url, дефолтные настройки)  |
+| `LLMModel`    | Модель конкретного провайдера (model_id, display_name, context_length) |
+| `UserAPIKey`  | API-ключ пользователя для провайдера (шифруется)            |
+| `Chat`        | Чат (связь с KnowledgeBase и LLMModel, переопределения настроек) |
+| `Message`     | Сообщение чата (role, content)                                                       |
 
 ---
 
@@ -115,24 +106,17 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 | PUT/PATCH  | `/{id}/`        | Обновление БЗ                                      |
 | DELETE     | `/{id}/`        | Удаление БЗ                                          |
 
-### Чаты (`/api/chats/`)
+### LLM Providers (`/api/llm/`)
 
-| Метод | Эндпоинт | Описание                                                    |
-| ---------- | ---------------- | ------------------------------------------------------------------- |
-| GET        | `/`            | Список чатов пользователя                    |
-| POST       | `/`            | Создание чата (требуется `knowledge_base`ID) |
-| GET        | `/{id}/`       | Детали чата                                               |
-| PUT/PATCH  | `/{id}/`       | Обновление чата                                       |
-| DELETE     | `/{id}/`       | Удаление чата                                           |
-
-### Сообщения (`/api/messages/`)
-
-| Метод | Эндпоинт | Описание                                                    |
-| ---------- | ---------------- | ------------------------------------------------------------------- |
-| GET        | `/`            | Список сообщений пользователя            |
-| POST       | `/`            | Создание сообщения (требуется `chat`ID) |
-| GET        | `/{id}/`       | Детали сообщения                                     |
-| DELETE     | `/{id}/`       | Удаление сообщения                                 |
+| Метод | Эндпоинт            | Описание                                         |
+| ---------- | --------------------------- | -------------------------------------------------------- |
+| GET        | `/providers/`             | Список активных провайдеров     |
+| GET        | `/providers/{id}/models/` | Модели провайдера                        |
+| GET        | `/models/`                | Список моделей                              |
+| POST       | `/user-api-keys/`         | Сохранить API-ключ пользователя |
+| GET        | `/chats/`                 | Список чатов пользователя         |
+| POST       | `/chats/`                 | Создать чат                                    |
+| GET        | `/messages/`              | Сообщения чата                              |
 
 ### RAG-чат (FastAPI, порт 8001)
 
@@ -145,12 +129,10 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 
 ---
 
-
-
 ## Права доступа (текущая логика)
 
 * Пользователь видит и управляет **только своими** KnowledgeBase, Chat, Message.
-* API требует JWT-токен в заголовке: `Authorization: Bearer <access_token>`.
+* API требует JWT-токен в заголовке: `Authorization: Bearer <access_token>` (кроме `/health`).
 * FastAPI проверяет права через Django API.
 * Для тестирования через браузер добавлена `SessionAuthentication` (временное решение).
 
@@ -158,18 +140,24 @@ Docs Mentor Platform — это RAG-платформа для работы с т
 
 ```
 docs_mentor/
-├── docker-compose.yml 		# PostgreSQL и Redis
-├── docs_mentor/ 		# Django проект
+├── docker-compose.yml
+├── docs_mentor/ # Django проект
 │ ├── settings.py
 │ └── urls.py
-├── users_app/ 			# Кастомная модель User + JWT
-├── knowledge_bases_app/ 	# Модели, API, парсинг, Celery
+├── users_app/ # Кастомная модель User
+├── knowledge_bases_app/ # Парсинг, чанкинг, векторная БД
 │ ├── models.py
 │ ├── views.py
 │ ├── tasks.py
 │ ├── chunking.py
 │ └── parsers/
-├── rag_chat_service/ 		# FastAPI RAG-сервис (НОВЫЙ)
+├── llms_app/ # LLM провайдеры, чаты, сообщения
+│ ├── models.py
+│ ├── views.py
+│ ├── serializers.py
+│ ├── urls.py
+│ └── admin.py
+├── rag_chat_service/ # FastAPI RAG-сервис
 │ ├── main.py
 │ ├── config.py
 │ ├── database.py
@@ -179,10 +167,10 @@ docs_mentor/
 │ │ └── chat.py
 │ └── services/
 │ ├── django_client.py
-│ └── llm_client.py
+│ └── provider_factory.py
 ├── logs/
-│ ├── docs_mentor.log 		# Логи Django
-│ └── rag_service.log 		# Логи FastAPI
+│ ├── docs_mentor.log
+│ └── rag_service.log
 ├── manage.py
 ├── .env
 ├── pyproject.toml
@@ -200,7 +188,7 @@ docs_mentor/
 
 ---
 
-## Архитектура и инфраструктура (Блок 2)
+## Архитектура и инфраструктура
 
 ### Запуск сервисов через Docker Compose
 
@@ -279,23 +267,18 @@ services:
 * `POST /chat/{chat_id}/ask` — обычный RAG-ответ
 * `POST /chat/{chat_id}/ask/stream` — потоковый RAG-ответ (SSE)
 
----
+## Блок 3+
 
-## Блок 3+ (планируется)
-
-**Поддержка нескольких LLM провайдеров:**
-
-* Модель `LLMProvider` в Django (название, base_url, api_key, дефолтные настройки)
-* Привязка провайдера к чату с возможностью переопределения модели и температуры
-* Шифрование API-ключей (`django-cryptography`)
-* Фабрика провайдеров в FastAPI (OpenAI-совместимые + Ollama)
-* Админка для управления провайдерами
-
----
+* ✅ Модели `LLMProvider`, `LLMModel`, `UserAPIKey`, `Chat`, `Message`
+* ✅ Шифрование API-ключей (маскировка в админке)
+* ✅ API для управления провайдерами и чатами
+* ✅ Фабрика провайдеров в FastAPI
+* ✅ Полная интеграция с RAG-чатом
 
 ## Блок 4 (планируется)
 
 * Минимальный веб-интерфейс (чат)
+* Написание тестов
 * Подключение к SSE-стримингу
 * Настройка CORS и безопасности
 * Docker-упаковка FastAPI
@@ -305,7 +288,7 @@ services:
 
 ## Идеи для развития
 
-* Поддержка нескольких LLM провайдеров (OpenAI, OpenRouter, Ollama)
+* ✅ Поддержка нескольких LLM провайдеров (OpenAI, OpenRouter, Ollama) ✅ Реализованно!
 * Публичные KnowledgeBase — возможность делиться готовыми БЗ
 * Саммаризация контекста для длинных диалогов
 * Перевод запросов/ответов
@@ -318,4 +301,4 @@ services:
 * Разработчик: [Raa5ty]
 * Руководитель: [тимлид]
 
-*Последнее обновление: *07 июня 2026 г.**
+*Последнее обновление: 10 июня 2026 г.*

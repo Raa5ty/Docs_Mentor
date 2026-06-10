@@ -18,3 +18,520 @@ WARNING 2026-06-07 15:29:35,576 log 33264 31104 Unauthorized: /api/chats/2/
 INFO 2026-06-07 15:35:21,314 autoreload 33264 7584 C:\Users\rusma\Pet_Projects\docs_mentor\docs_mentor\settings.py changed, reloading.
 INFO 2026-06-07 15:35:22,387 autoreload 34740 9224 Watching for file changes with StatReloader
 INFO 2026-06-07 15:35:48,256 autoreload 35296 19996 Watching for file changes with StatReloader
+INFO 2026-06-08 22:23:27,799 autoreload 37108 17524 Watching for file changes with StatReloader
+WARNING 2026-06-08 22:23:43,993 log 37108 21384 Not Found: /
+INFO 2026-06-08 22:25:07,289 autoreload 37108 17524 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-08 22:25:08,302 autoreload 32000 30612 Watching for file changes with StatReloader
+INFO 2026-06-08 22:56:54,784 autoreload 6416 548 Watching for file changes with StatReloader
+INFO 2026-06-09 18:52:45,459 autoreload 27496 18724 Watching for file changes with StatReloader
+INFO 2026-06-09 18:58:13,628 autoreload 27496 18724 C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\core\signing.py changed, reloading.
+INFO 2026-06-09 18:58:14,578 autoreload 28836 36656 Watching for file changes with StatReloader
+INFO 2026-06-09 19:00:53,592 autoreload 22936 23700 Watching for file changes with StatReloader
+INFO 2026-06-09 19:04:00,668 autoreload 18076 35972 Watching for file changes with StatReloader
+ERROR 2026-06-09 19:04:36,203 log 18076 23436 Internal Server Error: /admin/llms_app/userapikey/
+Traceback (most recent call last):
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\options.py", line 711, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 247, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\options.py", line 2124, in changelist_view
+    "selection_note": _("0 of %(cnt)s selected") % {"cnt": len(cl.result_list)},
+                                                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 127, in __iter__
+    for row in compiler.results_iter(results):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1542, in apply_converters
+    value = converter(value, expression, connection)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\fields.py", line 174, in from_db_value
+    return self._load(force_bytes(value))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\fields.py", line 116, in _load
+    return pickle.loads(self._fernet.decrypt(value, self.ttl))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\utils\crypto.py", line 143, in decrypt
+    data = self._signer.unsign(data, ttl)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\core\signing.py", line 242, in unsign
+    raise BadSignature('Signature version not supported')
+django.core.signing.BadSignature: Signature version not supported
+ERROR 2026-06-09 19:04:53,737 log 18076 23436 Internal Server Error: /admin/llms_app/userapikey/
+Traceback (most recent call last):
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\options.py", line 711, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 247, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\options.py", line 2124, in changelist_view
+    "selection_note": _("0 of %(cnt)s selected") % {"cnt": len(cl.result_list)},
+                                                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 127, in __iter__
+    for row in compiler.results_iter(results):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1542, in apply_converters
+    value = converter(value, expression, connection)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\fields.py", line 174, in from_db_value
+    return self._load(force_bytes(value))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\fields.py", line 116, in _load
+    return pickle.loads(self._fernet.decrypt(value, self.ttl))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\utils\crypto.py", line 143, in decrypt
+    data = self._signer.unsign(data, ttl)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\core\signing.py", line 242, in unsign
+    raise BadSignature('Signature version not supported')
+django.core.signing.BadSignature: Signature version not supported
+ERROR 2026-06-09 19:07:04,319 log 18076 28792 Internal Server Error: /admin/llms_app/userapikey/
+Traceback (most recent call last):
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\options.py", line 711, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\views\decorators\cache.py", line 80, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\sites.py", line 247, in inner
+    return view(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 192, in _view_wrapper
+    result = _process_exception(request, e)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\utils\decorators.py", line 190, in _view_wrapper
+    response = view_func(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\contrib\admin\options.py", line 2124, in changelist_view
+    "selection_note": _("0 of %(cnt)s selected") % {"cnt": len(cl.result_list)},
+                                                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 372, in __len__
+    self._fetch_all()
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 2000, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\query.py", line 127, in __iter__
+    for row in compiler.results_iter(results):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1542, in apply_converters
+    value = converter(value, expression, connection)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\fields.py", line 174, in from_db_value
+    return self._load(force_bytes(value))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\fields.py", line 116, in _load
+    return pickle.loads(self._fernet.decrypt(value, self.ttl))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\utils\crypto.py", line 143, in decrypt
+    data = self._signer.unsign(data, ttl)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django_cryptography\core\signing.py", line 242, in unsign
+    raise BadSignature('Signature version not supported')
+django.core.signing.BadSignature: Signature version not supported
+INFO 2026-06-09 20:00:28,246 autoreload 4532 13904 Watching for file changes with StatReloader
+INFO 2026-06-09 20:11:45,665 autoreload 32448 27020 Watching for file changes with StatReloader
+INFO 2026-06-09 20:20:02,505 autoreload 32448 27020 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:20:03,494 autoreload 26868 32076 Watching for file changes with StatReloader
+INFO 2026-06-09 20:22:05,133 autoreload 26868 32076 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:22:06,099 autoreload 36036 37748 Watching for file changes with StatReloader
+INFO 2026-06-09 20:22:19,139 autoreload 36036 37748 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:22:20,066 autoreload 31960 32648 Watching for file changes with StatReloader
+INFO 2026-06-09 20:24:49,891 autoreload 31960 32648 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:24:50,832 autoreload 35092 35232 Watching for file changes with StatReloader
+INFO 2026-06-09 20:24:56,459 autoreload 35092 35232 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:24:57,322 autoreload 35972 7640 Watching for file changes with StatReloader
+INFO 2026-06-09 20:25:01,960 autoreload 35972 7640 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:25:02,729 autoreload 32420 20440 Watching for file changes with StatReloader
+INFO 2026-06-09 20:25:04,184 autoreload 32420 20440 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:25:04,966 autoreload 27584 32416 Watching for file changes with StatReloader
+INFO 2026-06-09 20:25:24,095 autoreload 27584 32416 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:25:25,003 autoreload 27832 22088 Watching for file changes with StatReloader
+INFO 2026-06-09 20:25:30,574 autoreload 27832 22088 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:25:31,525 autoreload 13356 33132 Watching for file changes with StatReloader
+INFO 2026-06-09 20:25:44,411 autoreload 13356 33132 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:25:45,366 autoreload 1752 13808 Watching for file changes with StatReloader
+INFO 2026-06-09 20:27:00,406 autoreload 1752 13808 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:27:01,179 autoreload 32416 15544 Watching for file changes with StatReloader
+INFO 2026-06-09 20:27:05,694 autoreload 32416 15544 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:27:06,634 autoreload 9984 21940 Watching for file changes with StatReloader
+INFO 2026-06-09 20:27:11,170 autoreload 9984 21940 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\admin.py changed, reloading.
+INFO 2026-06-09 20:27:12,141 autoreload 25748 2996 Watching for file changes with StatReloader
+INFO 2026-06-09 20:30:42,726 autoreload 25748 2996 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:30:43,705 autoreload 8928 18172 Watching for file changes with StatReloader
+INFO 2026-06-09 20:31:00,413 autoreload 8928 18172 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:31:01,375 autoreload 6976 7584 Watching for file changes with StatReloader
+INFO 2026-06-09 20:31:34,748 autoreload 6976 7584 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:31:35,717 autoreload 1752 10304 Watching for file changes with StatReloader
+INFO 2026-06-09 20:33:59,941 autoreload 1752 10304 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:00,994 autoreload 35328 32168 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:12,875 autoreload 35328 32168 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:13,842 autoreload 28388 33124 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:15,262 autoreload 28388 33124 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:16,123 autoreload 16168 5176 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:25,070 autoreload 16168 5176 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:25,983 autoreload 11032 19692 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:27,412 autoreload 11032 19692 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:28,381 autoreload 22956 35056 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:29,857 autoreload 22956 35056 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:30,795 autoreload 9188 21264 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:33,279 autoreload 9188 21264 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:34,270 autoreload 3572 36336 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:35,686 autoreload 3572 36336 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:36,656 autoreload 30984 31516 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:39,136 autoreload 30984 31516 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:40,109 autoreload 10216 7632 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:47,832 autoreload 10216 7632 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:48,828 autoreload 19292 6668 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:52,354 autoreload 19292 6668 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:53,247 autoreload 3840 4552 Watching for file changes with StatReloader
+INFO 2026-06-09 20:34:54,671 autoreload 3840 4552 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:34:55,573 autoreload 11684 25160 Watching for file changes with StatReloader
+INFO 2026-06-09 20:35:16,147 autoreload 11684 25160 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:35:17,109 autoreload 36656 1432 Watching for file changes with StatReloader
+INFO 2026-06-09 20:37:38,525 autoreload 36656 1432 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:37:39,464 autoreload 31860 37780 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:18,999 autoreload 31860 37780 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:19,906 autoreload 9876 11468 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:21,326 autoreload 9876 11468 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:22,239 autoreload 36004 32200 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:24,663 autoreload 36004 32200 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:25,587 autoreload 6932 37728 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:28,092 autoreload 6932 37728 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:28,970 autoreload 18572 23844 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:36,621 autoreload 18572 23844 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:37,544 autoreload 20696 16608 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:43,124 autoreload 20696 16608 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:43,998 autoreload 18676 9980 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:48,633 autoreload 18676 9980 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:49,537 autoreload 27616 25156 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:52,010 autoreload 27616 25156 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:38:52,911 autoreload 20328 7948 Watching for file changes with StatReloader
+INFO 2026-06-09 20:38:59,478 autoreload 20328 7948 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:39:00,393 autoreload 26172 25828 Watching for file changes with StatReloader
+INFO 2026-06-09 20:41:21,646 autoreload 26172 25828 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:41:22,617 autoreload 17892 17632 Watching for file changes with StatReloader
+INFO 2026-06-09 20:41:35,588 autoreload 17892 17632 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:41:36,561 autoreload 18876 21852 Watching for file changes with StatReloader
+INFO 2026-06-09 20:42:17,918 autoreload 22932 7860 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:09,429 autoreload 22932 7860 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:09,451 autoreload 18876 21852 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:10,419 autoreload 22820 15812 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:10,419 autoreload 1404 32448 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:23,483 autoreload 22820 15812 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:23,487 autoreload 1404 32448 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:24,425 autoreload 25660 4468 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:24,425 autoreload 31736 21592 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:25,925 autoreload 25660 4468 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:25,939 autoreload 31736 21592 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:26,859 autoreload 28556 12392 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:26,859 autoreload 20720 1432 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:28,342 autoreload 28556 12392 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:28,347 autoreload 20720 1432 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:29,301 autoreload 16480 35092 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:29,303 autoreload 8464 33952 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:54,166 autoreload 8464 33952 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:54,192 autoreload 16480 35092 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:55,159 autoreload 33476 34548 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:55,160 autoreload 27608 35836 Watching for file changes with StatReloader
+INFO 2026-06-09 20:44:56,625 autoreload 33476 34548 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:56,630 autoreload 27608 35836 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:44:57,617 autoreload 7160 17524 Watching for file changes with StatReloader
+
+INFO 2026-06-09 20:45:00,182 autoreload 7160 17524 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:00,183 autoreload 31736 24096 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:01,178 autoreload 34924 36152 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:01,178 autoreload 34912 32188 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:34,341 autoreload 34912 32188 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:34,362 autoreload 34924 36152 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:35,318 autoreload 28212 36964 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:35,322 autoreload 6936 5292 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:37,854 autoreload 6936 5292 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:37,866 autoreload 28212 36964 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:38,841 autoreload 7008 27920 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:38,841 autoreload 30608 12144 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:41,343 autoreload 7008 27920 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:41,356 autoreload 30608 12144 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:42,294 autoreload 2648 33940 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:42,294 autoreload 4240 15016 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:43,788 autoreload 4240 15016 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:43,792 autoreload 2648 33940 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:44,769 autoreload 37352 36708 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:44,771 autoreload 33156 17436 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:49,460 autoreload 33156 17436 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:49,462 autoreload 37352 36708 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:50,410 autoreload 26068 34132 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:50,411 autoreload 4520 23916 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:55,065 autoreload 26068 34132 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:55,085 autoreload 4520 23916 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:56,049 autoreload 25984 15136 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:56,049 autoreload 28500 22860 Watching for file changes with StatReloader
+INFO 2026-06-09 20:45:59,609 autoreload 25984 15136 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:45:59,623 autoreload 28500 22860 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:46:00,555 autoreload 8624 19192 Watching for file changes with StatReloader
+
+INFO 2026-06-09 20:46:13,676 autoreload 34216 25796 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:46:13,814 autoreload 8624 19192 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:46:14,679 autoreload 8376 19172 Watching for file changes with StatReloader
+INFO 2026-06-09 20:46:14,793 autoreload 13576 35972 Watching for file changes with StatReloader
+INFO 2026-06-09 20:51:15,501 autoreload 13576 35972 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:51:15,505 autoreload 8376 19172 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:51:16,524 autoreload 26524 3564 Watching for file changes with StatReloader
+INFO 2026-06-09 20:51:21,176 autoreload 26524 3564 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:51:21,233 autoreload 23660 8188 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:51:22,195 autoreload 30240 19916 Watching for file changes with StatReloader
+INFO 2026-06-09 20:51:22,199 autoreload 36640 34820 Watching for file changes with StatReloader
+INFO 2026-06-09 20:51:55,608 autoreload 30240 19916 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:51:56,210 autoreload 36640 34820 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\forms.py changed, reloading.
+INFO 2026-06-09 20:51:56,648 autoreload 15556 32908 Watching for file changes with StatReloader
+INFO 2026-06-09 20:51:57,198 autoreload 7412 23920 Watching for file changes with StatReloader
+INFO 2026-06-10 14:15:59,703 autoreload 4628 26544 Watching for file changes with StatReloader
+WARNING 2026-06-10 14:16:42,293 log 4628 23904 Not Found: /auth/login/
+WARNING 2026-06-10 14:17:07,119 log 4628 23904 Method Not Allowed: /api/auth/login/
+WARNING 2026-06-10 14:20:15,316 log 4628 24636 Unauthorized: /api/llm/providers/
+WARNING 2026-06-10 14:20:21,965 log 4628 25888 Unauthorized: /api/llm/providers/1/models/
+WARNING 2026-06-10 14:20:28,045 log 4628 24616 Unauthorized: /api/llm/chats/
+WARNING 2026-06-10 14:31:31,809 log 4628 10368 Not Found: /api/llm/providers/1/models/
+WARNING 2026-06-10 14:32:31,526 log 4628 24352 Bad Request: /api/llm/chats/
+INFO 2026-06-10 20:22:20,128 autoreload 16620 27580 Watching for file changes with StatReloader
+INFO 2026-06-10 21:02:58,017 autoreload 7512 544 Watching for file changes with StatReloader
+INFO 2026-06-10 21:08:53,667 tasks 9988 3140 Начинаем обработку KB 1 - Test FastAPI Docs
+INFO 2026-06-10 21:08:53,672 tasks 9988 3140 Собираем страницы для https://fastapi.tiangolo.com/...
+INFO 2026-06-10 21:08:54,477 tasks 9988 3140 Найдено 151 страниц
+INFO 2026-06-10 21:08:54,883 tasks 9988 3140 Обработана страница 1/151: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/ -> 8 чанков
+INFO 2026-06-10 21:08:55,139 tasks 9988 3140 Обработана страница 2/151: https://fastapi.tiangolo.com/how-to/custom-docs-ui-assets/ -> 7 чанков
+INFO 2026-06-10 21:08:55,323 tasks 9988 3140 Обработана страница 3/151: https://fastapi.tiangolo.com/tutorial/ -> 1 чанков
+INFO 2026-06-10 21:08:55,573 tasks 9988 3140 Обработана страница 4/151: https://fastapi.tiangolo.com/reference/openapi/docs/ -> 6 чанков
+INFO 2026-06-10 21:08:55,747 tasks 9988 3140 Обработана страница 5/151: https://fastapi.tiangolo.com/tutorial/cookie-params/ -> 1 чанков
+INFO 2026-06-10 21:08:56,045 tasks 9988 3140 Обработана страница 6/151: https://fastapi.tiangolo.com/advanced/settings/ -> 7 чанков
+INFO 2026-06-10 21:08:56,226 tasks 9988 3140 Обработана страница 7/151: https://fastapi.tiangolo.com/benchmarks/ -> 1 чанков
+INFO 2026-06-10 21:08:56,458 tasks 9988 3140 Обработана страница 8/151: https://fastapi.tiangolo.com/advanced/path-operation-advanced-configuration/ -> 4 чанков
+INFO 2026-06-10 21:08:56,646 tasks 9988 3140 Обработана страница 9/151: https://fastapi.tiangolo.com/how-to/conditional-openapi/ -> 1 чанков
+INFO 2026-06-10 21:08:56,870 tasks 9988 3140 Обработана страница 10/151: https://fastapi.tiangolo.com/deployment/docker/ -> 10 чанков
+INFO 2026-06-10 21:08:57,073 tasks 9988 3140 Обработана страница 11/151: https://fastapi.tiangolo.com/how-to/separate-openapi-schemas/ -> 3 чанков
+INFO 2026-06-10 21:08:57,397 tasks 9988 3140 Обработана страница 12/151: https://fastapi.tiangolo.com/tutorial/handling-errors/ -> 6 чанков
+INFO 2026-06-10 21:08:57,577 tasks 9988 3140 Обработана страница 13/151: https://fastapi.tiangolo.com/how-to/authentication-error-status-code/ -> 1 чанков
+INFO 2026-06-10 21:08:57,774 tasks 9988 3140 Обработана страница 14/151: https://fastapi.tiangolo.com/external-links/ -> 1 чанков
+INFO 2026-06-10 21:08:57,952 tasks 9988 3140 Обработана страница 15/151: https://fastapi.tiangolo.com/management/ -> 1 чанков
+INFO 2026-06-10 21:08:58,124 tasks 9988 3140 Обработана страница 16/151: https://fastapi.tiangolo.com/resources/ -> 1 чанков
+INFO 2026-06-10 21:08:58,330 tasks 9988 3140 Обработана страница 17/151: https://fastapi.tiangolo.com/how-to/extending-openapi/ -> 3 чанков
+INFO 2026-06-10 21:08:58,517 tasks 9988 3140 Обработана страница 18/151: https://fastapi.tiangolo.com/advanced/advanced-python-types/ -> 1 чанков
+INFO 2026-06-10 21:08:58,699 tasks 9988 3140 Обработана страница 19/151: https://fastapi.tiangolo.com/advanced/openapi-webhooks/ -> 1 чанков
+INFO 2026-06-10 21:08:58,910 tasks 9988 3140 Обработана страница 20/151: https://fastapi.tiangolo.com/tutorial/query-params/ -> 3 чанков
+INFO 2026-06-10 21:08:59,082 tasks 9988 3140 Обработана страница 21/151: https://fastapi.tiangolo.com/advanced/security/ -> 1 чанков
+INFO 2026-06-10 21:08:59,304 tasks 9988 3140 Обработана страница 22/151: https://fastapi.tiangolo.com/advanced/templates/ -> 1 чанков
+INFO 2026-06-10 21:08:59,486 tasks 9988 3140 Обработана страница 23/151: https://fastapi.tiangolo.com/tutorial/extra-data-types/ -> 1 чанков
+INFO 2026-06-10 21:08:59,717 tasks 9988 3140 Обработана страница 24/151: https://fastapi.tiangolo.com/advanced/websockets/ -> 5 чанков
+INFO 2026-06-10 21:08:59,944 tasks 9988 3140 Обработана страница 25/151: https://fastapi.tiangolo.com/tutorial/body-nested-models/ -> 5 чанков
+INFO 2026-06-10 21:09:00,118 tasks 9988 3140 Обработана страница 26/151: https://fastapi.tiangolo.com/reference/ -> 1 чанков
+INFO 2026-06-10 21:09:00,291 tasks 9988 3140 Обработана страница 27/151: https://fastapi.tiangolo.com/advanced/testing-events/ -> 1 чанков
+INFO 2026-06-10 21:09:00,504 tasks 9988 3140 Обработана страница 28/151: https://fastapi.tiangolo.com/deployment/concepts/ -> 6 чанков
+INFO 2026-06-10 21:09:00,671 tasks 9988 3140 Обработана страница 29/151: https://fastapi.tiangolo.com/tutorial/debugging/ -> 1 чанков
+INFO 2026-06-10 21:09:00,888 tasks 9988 3140 Обработана страница 30/151: https://fastapi.tiangolo.com/tutorial/request-form-models/ -> 1 чанков
+INFO 2026-06-10 21:09:01,073 tasks 9988 3140 Обработана страница 31/151: https://fastapi.tiangolo.com/history-design-future/ -> 1 чанков
+INFO 2026-06-10 21:09:02,828 tasks 9988 3140 Обработана страница 32/151: https://github.com/fastapi/fastapi -> 7 чанков
+INFO 2026-06-10 21:09:03,014 tasks 9988 3140 Обработана страница 33/151: https://fastapi.tiangolo.com/tutorial/cookie-param-models/ -> 1 чанков
+INFO 2026-06-10 21:09:03,266 tasks 9988 3140 Обработана страница 34/151: https://fastapi.tiangolo.com/advanced/additional-responses/ -> 4 чанков
+INFO 2026-06-10 21:09:04,026 tasks 9988 3140 Обработана страница 35/151: https://fastapi.tiangolo.com/advanced/response-cookies/ -> 1 чанков
+INFO 2026-06-10 21:09:04,200 tasks 9988 3140 Обработана страница 36/151: https://fastapi.tiangolo.com/advanced/sub-applications/ -> 1 чанков
+INFO 2026-06-10 21:09:04,411 tasks 9988 3140 Обработана страница 37/151: https://fastapi.tiangolo.com/reference/httpconnection/ -> 1 чанков
+INFO 2026-06-10 21:09:04,621 tasks 9988 3140 Обработана страница 38/151: https://fastapi.tiangolo.com/advanced/testing-dependencies/ -> 3 чанков
+INFO 2026-06-10 21:09:04,798 tasks 9988 3140 Обработана страница 39/151: https://fastapi.tiangolo.com/how-to/graphql/ -> 1 чанков
+INFO 2026-06-10 21:09:05,649 tasks 9988 3140 Обработана страница 40/151: https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/ -> 48 чанков
+INFO 2026-06-10 21:09:05,850 tasks 9988 3140 Обработана страница 41/151: https://fastapi.tiangolo.com/tutorial/header-param-models/ -> 1 чанков
+INFO 2026-06-10 21:09:06,095 tasks 9988 3140 Обработана страница 42/151: https://fastapi.tiangolo.com/tutorial/path-params/ -> 5 чанков
+INFO 2026-06-10 21:09:06,254 tasks 9988 3140 Обработана страница 43/151: https://fastapi.tiangolo.com/tutorial/static-files/ -> 1 чанков
+INFO 2026-06-10 21:09:07,463 tasks 9988 3140 Обработана страница 44/151: https://fastapi.tiangolo.com/reference/fastapi/ -> 83 чанков
+INFO 2026-06-10 21:09:07,705 tasks 9988 3140 Обработана страница 45/151: https://fastapi.tiangolo.com/tutorial/body-multiple-params/ -> 5 чанков
+INFO 2026-06-10 21:09:07,966 tasks 9988 3140 Обработана страница 46/151: https://fastapi.tiangolo.com/tutorial/bigger-applications/ -> 11 чанков
+INFO 2026-06-10 21:09:08,272 tasks 9988 3140 Обработана страница 47/151: https://fastapi.tiangolo.com/advanced/advanced-dependencies/ -> 8 чанков
+INFO 2026-06-10 21:09:08,518 tasks 9988 3140 Обработана страница 48/151: https://fastapi.tiangolo.com/advanced/json-base64-bytes/ -> 3 чанков
+INFO 2026-06-10 21:09:08,795 tasks 9988 3140 Обработана страница 49/151: https://fastapi.tiangolo.com/advanced/custom-response/ -> 6 чанков
+INFO 2026-06-10 21:09:09,014 tasks 9988 3140 Обработана страница 50/151: https://fastapi.tiangolo.com/advanced/openapi-callbacks/ -> 5 чанков
+INFO 2026-06-10 21:09:09,183 tasks 9988 3140 Обработана страница 51/151: https://fastapi.tiangolo.com/tutorial/response-status-code/ -> 1 чанков
+INFO 2026-06-10 21:09:09,341 tasks 9988 3140 Обработана страница 52/151: https://fastapi.tiangolo.com/learn/ -> 1 чанков
+INFO 2026-06-10 21:09:09,589 tasks 9988 3140 Обработана страница 53/151: https://fastapi.tiangolo.com/tutorial/path-params-numeric-validations/ -> 6 чанков
+INFO 2026-06-10 21:09:09,767 tasks 9988 3140 Обработана страница 54/151: https://fastapi.tiangolo.com/tutorial/request-forms-and-files/ -> 1 чанков
+INFO 2026-06-10 21:09:10,016 tasks 9988 3140 Обработана страница 55/151: https://fastapi.tiangolo.com/tutorial/dependencies/ -> 5 чанков
+INFO 2026-06-10 21:09:10,422 tasks 9988 3140 Обработана страница 56/151: https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/ -> 21 чанков
+INFO 2026-06-10 21:09:10,573 tasks 9988 3140 Обработана страница 57/151: https://fastapi.tiangolo.com/how-to/ -> 1 чанков
+INFO 2026-06-10 21:09:10,762 tasks 9988 3140 Обработана страница 58/151: https://fastapi.tiangolo.com/reference/exceptions/ -> 1 чанков
+INFO 2026-06-10 21:09:11,027 tasks 9988 3140 Обработана страница 59/151: https://fastapi.tiangolo.com/advanced/behind-a-proxy/ -> 7 чанков
+INFO 2026-06-10 21:09:11,191 tasks 9988 3140 Обработана страница 60/151: https://fastapi.tiangolo.com/features/ -> 3 чанков
+INFO 2026-06-10 21:09:11,397 tasks 9988 3140 Обработана страница 61/151: https://fastapi.tiangolo.com/tutorial/request-files/ -> 6 чанков
+INFO 2026-06-10 21:09:11,554 tasks 9988 3140 Обработана страница 62/151: https://fastapi.tiangolo.com/tutorial/security/ -> 1 чанков
+INFO 2026-06-10 21:09:11,710 tasks 9988 3140 Обработана страница 63/151: https://fastapi.tiangolo.com/about/ -> 1 чанков
+INFO 2026-06-10 21:09:11,889 tasks 9988 3140 Обработана страница 64/151: https://fastapi.tiangolo.com/advanced/response-change-status-code/ -> 1 чанков
+INFO 2026-06-10 21:09:12,055 tasks 9988 3140 Обработана страница 65/151: https://fastapi.tiangolo.com/deployment/ -> 1 чанков
+INFO 2026-06-10 21:09:12,547 tasks 9988 3140 Обработана страница 66/151: https://fastapi.tiangolo.com/reference/security/ -> 24 чанков
+INFO 2026-06-10 21:09:12,793 tasks 9988 3140 Обработана страница 67/151: https://fastapi.tiangolo.com/tutorial/dependencies/classes-as-dependencies/ -> 8 чанков
+INFO 2026-06-10 21:09:13,105 tasks 9988 3140 Обработана страница 68/151: https://fastapi.tiangolo.com/reference/websockets/ -> 5 чанков
+INFO 2026-06-10 21:09:13,281 tasks 9988 3140 Обработана страница 69/151: https://fastapi.tiangolo.com/newsletter/ -> 1 чанков
+INFO 2026-06-10 21:09:13,462 tasks 9988 3140 Обработана страница 70/151: https://fastapi.tiangolo.com/tutorial/query-param-models/ -> 1 чанков
+INFO 2026-06-10 21:09:13,786 tasks 9988 3140 Обработана страница 71/151: https://fastapi.tiangolo.com/alternatives/ -> 7 чанков
+INFO 2026-06-10 21:09:13,979 tasks 9988 3140 Обработана страница 72/151: https://fastapi.tiangolo.com/contributing/ -> 1 чанков
+INFO 2026-06-10 21:09:14,190 tasks 9988 3140 Обработана страница 73/151: https://fastapi.tiangolo.com/advanced/generate-clients/ -> 5 чанков
+INFO 2026-06-10 21:09:14,374 tasks 9988 3140 Обработана страница 74/151: https://fastapi.tiangolo.com/tutorial/security/first-steps/ -> 4 чанков
+INFO 2026-06-10 21:09:14,611 tasks 9988 3140 Обработана страница 75/151: https://fastapi.tiangolo.com/tutorial/stream-json-lines/ -> 5 чанков
+INFO 2026-06-10 21:09:14,860 tasks 9988 3140 Обработана страница 76/151: https://fastapi.tiangolo.com/how-to/configure-swagger-ui/ -> 5 чанков
+INFO 2026-06-10 21:09:15,104 tasks 9988 3140 Обработана страница 77/151: https://fastapi.tiangolo.com/reference/status/ -> 4 чанков
+INFO 2026-06-10 21:09:15,266 tasks 9988 3140 Обработана страница 78/151: https://fastapi.tiangolo.com/how-to/general/ -> 1 чанков
+INFO 2026-06-10 21:09:15,426 tasks 9988 3140 Обработана страница 79/151: https://fastapi.tiangolo.com/reference/openapi/ -> 1 чанков
+INFO 2026-06-10 21:09:15,599 tasks 9988 3140 Обработана страница 80/151: https://fastapi.tiangolo.com/deployment/manually/ -> 1 чанков
+INFO 2026-06-10 21:09:15,763 tasks 9988 3140 Обработана страница 81/151: https://fastapi.tiangolo.com/tutorial/dependencies/global-dependencies/ -> 1 чанков
+INFO 2026-06-10 21:09:16,475 tasks 9988 3140 Обработана страница 82/151: https://fastapi.tiangolo.com/reference/parameters/ -> 35 чанков
+INFO 2026-06-10 21:09:16,688 tasks 9988 3140 Обработана страница 83/151: https://fastapi.tiangolo.com/virtual-environments/ -> 7 чанков
+INFO 2026-06-10 21:09:16,990 tasks 9988 3140 Обработана страница 84/151: https://fastapi.tiangolo.com/how-to/custom-request-and-route/ -> 7 чанков
+INFO 2026-06-10 21:09:17,178 tasks 9988 3140 Обработана страница 85/151: https://fastapi.tiangolo.com/tutorial/dependencies/sub-dependencies/ -> 3 чанков
+INFO 2026-06-10 21:09:17,354 tasks 9988 3140 Обработана страница 86/151: https://fastapi.tiangolo.com/reference/background/ -> 1 чанков
+INFO 2026-06-10 21:09:17,544 tasks 9988 3140 Обработана страница 87/151: https://fastapi.tiangolo.com/async/ -> 8 чанков
+INFO 2026-06-10 21:09:18,068 tasks 9988 3140 Обработана страница 88/151: https://fastapi.tiangolo.com/reference/openapi/models/ -> 9 чанков
+INFO 2026-06-10 21:09:18,239 tasks 9988 3140 Обработана страница 89/151: https://fastapi.tiangolo.com/advanced/strict-content-type/ -> 1 чанков
+INFO 2026-06-10 21:09:18,438 tasks 9988 3140 Обработана страница 90/151: https://fastapi.tiangolo.com/deployment/https/ -> 5 чанков
+INFO 2026-06-10 21:09:18,677 tasks 9988 3140 Обработана страница 91/151: https://fastapi.tiangolo.com/tutorial/testing/ -> 6 чанков
+INFO 2026-06-10 21:09:18,840 tasks 9988 3140 Обработана страница 92/151: https://fastapi.tiangolo.com/help-fastapi/ -> 1 чанков
+INFO 2026-06-10 21:09:19,014 tasks 9988 3140 Обработана страница 93/151: https://fastapi.tiangolo.com/tutorial/body-fields/ -> 1 чанков
+INFO 2026-06-10 21:09:19,198 tasks 9988 3140 Обработана страница 94/151: https://fastapi.tiangolo.com/tutorial/metadata/ -> 4 чанков
+INFO 2026-06-10 21:09:20,282 tasks 9988 3140 Обработана страница 95/151: https://fastapi.tiangolo.com/reference/apirouter/ -> 70 чанков
+INFO 2026-06-10 21:09:20,514 tasks 9988 3140 Обработана страница 96/151: https://fastapi.tiangolo.com/tutorial/first-steps/ -> 5 чанков
+INFO 2026-06-10 21:09:21,427 tasks 9988 3140 Обработана страница 97/151: https://fastapi.tiangolo.com/advanced/async-tests/ -> 1 чанков
+INFO 2026-06-10 21:09:21,596 tasks 9988 3140 Обработана страница 98/151: https://fastapi.tiangolo.com/translations/ -> 1 чанков
+INFO 2026-06-10 21:09:22,906 tasks 9988 3140 Обработана страница 99/151: https://fastapi.tiangolo.com/release-notes/ -> 97 чанков
+INFO 2026-06-10 21:09:23,138 tasks 9988 3140 Обработана страница 100/151: https://fastapi.tiangolo.com/how-to/migrate-from-pydantic-v1-to-pydantic-v2/ -> 3 чанков
+INFO 2026-06-10 21:09:23,937 tasks 9988 3140 Обработана страница 101/151: https://fastapi.tiangolo.com/reference/responses/ -> 15 чанков
+INFO 2026-06-10 21:09:24,184 tasks 9988 3140 Обработана страница 102/151: https://fastapi.tiangolo.com/deployment/versions/ -> 1 чанков
+INFO 2026-06-10 21:09:24,515 tasks 9988 3140 Обработана страница 103/151: https://fastapi.tiangolo.com/tutorial/security/get-current-user/ -> 6 чанков
+INFO 2026-06-10 21:09:24,715 tasks 9988 3140 Обработана страница 104/151: https://fastapi.tiangolo.com/editor-support/ -> 1 чанков
+INFO 2026-06-10 21:09:24,861 tasks 9988 3140 Обработана страница 105/151: https://fastapi.tiangolo.com/deployment/cloud/ -> 1 чанков
+INFO 2026-06-10 21:09:25,079 tasks 9988 3140 Обработана страница 106/151: https://fastapi.tiangolo.com/reference/response/ -> 1 чанков
+INFO 2026-06-10 21:09:25,447 tasks 9988 3140 Обработана страница 107/151: https://fastapi.tiangolo.com/advanced/stream-data/ -> 34 чанков
+INFO 2026-06-10 21:09:25,648 tasks 9988 3140 Обработана страница 108/151: https://fastapi.tiangolo.com/tutorial/schema-extra-example/ -> 6 чанков
+INFO 2026-06-10 21:09:29,725 tasks 9988 3140 Обработана страница 109/151: https://fastapi.tiangolo.com/tutorial/cors/ -> 1 чанков
+INFO 2026-06-10 21:09:29,909 tasks 9988 3140 Обработана страница 110/151: https://fastapi.tiangolo.com/tutorial/path-operation-configuration/ -> 3 чанков
+INFO 2026-06-10 21:09:30,111 tasks 9988 3140 Обработана страница 111/151: https://fastapi.tiangolo.com/reference/uploadfile/ -> 1 чанков
+INFO 2026-06-10 21:09:30,360 tasks 9988 3140 Обработана страница 112/151: https://fastapi.tiangolo.com/fastapi-people/ -> 6 чанков
+INFO 2026-06-10 21:09:30,603 tasks 9988 3140 Обработана страница 113/151: https://fastapi.tiangolo.com/advanced/events/ -> 5 чанков
+INFO 2026-06-10 21:09:30,844 tasks 9988 3140 Обработана страница 114/151: https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-in-path-operation-decorators/ -> 4 чанков
+INFO 2026-06-10 21:09:31,076 tasks 9988 3140 Обработана страница 115/151: https://fastapi.tiangolo.com/reference/request/ -> 1 чанков
+INFO 2026-06-10 21:09:31,255 tasks 9988 3140 Обработана страница 116/151: https://fastapi.tiangolo.com/tutorial/encoder/ -> 1 чанков
+INFO 2026-06-10 21:09:31,452 tasks 9988 3140 Обработана страница 117/151: https://fastapi.tiangolo.com/deployment/server-workers/ -> 1 чанков
+INFO 2026-06-10 21:09:31,761 tasks 9988 3140 Обработана страница 118/151: https://fastapi.tiangolo.com/tutorial/server-sent-events/ -> 6 чанков
+INFO 2026-06-10 21:09:31,959 tasks 9988 3140 Обработана страница 119/151: https://fastapi.tiangolo.com/tutorial/background-tasks/ -> 3 чанков
+INFO 2026-06-10 21:09:32,219 tasks 9988 3140 Обработана страница 120/151: https://fastapi.tiangolo.com/advanced/security/http-basic-auth/ -> 5 чанков
+INFO 2026-06-10 21:09:32,385 tasks 9988 3140 Обработана страница 121/151: https://fastapi.tiangolo.com/project-generation/ -> 1 чанков
+INFO 2026-06-10 21:09:32,613 tasks 9988 3140 Обработана страница 122/151: https://fastapi.tiangolo.com/advanced/response-headers/ -> 1 чанков
+INFO 2026-06-10 21:09:32,866 tasks 9988 3140 Обработана страница 123/151: https://fastapi.tiangolo.com/reference/encoders/ -> 4 чанков
+INFO 2026-06-10 21:09:33,055 tasks 9988 3140 Обработана страница 124/151: https://fastapi.tiangolo.com/tutorial/middleware/ -> 1 чанков
+INFO 2026-06-10 21:09:33,293 tasks 9988 3140 Обработана страница 125/151: https://fastapi.tiangolo.com/environment-variables/ -> 3 чанков
+INFO 2026-06-10 21:09:33,465 tasks 9988 3140 Обработана страница 126/151: https://fastapi.tiangolo.com/advanced/wsgi/ -> 1 чанков
+INFO 2026-06-10 21:09:33,738 tasks 9988 3140 Обработана страница 127/151: https://fastapi.tiangolo.com/reference/staticfiles/ -> 4 чанков
+INFO 2026-06-10 21:09:33,901 tasks 9988 3140 Обработана страница 128/151: https://fastapi.tiangolo.com/how-to/testing-database/ -> 1 чанков
+INFO 2026-06-10 21:09:34,076 tasks 9988 3140 Обработана страница 129/151: https://fastapi.tiangolo.com/tutorial/request-forms/ -> 1 чанков
+INFO 2026-06-10 21:09:34,270 tasks 9988 3140 Обработана страница 130/151: https://fastapi.tiangolo.com/tutorial/body/ -> 4 чанков
+INFO 2026-06-10 21:09:34,631 tasks 9988 3140 Обработана страница 131/151: https://fastapi.tiangolo.com/tutorial/query-params-str-validations/ -> 14 чанков
+INFO 2026-06-10 21:09:34,815 tasks 9988 3140 Обработана страница 132/151: https://fastapi.tiangolo.com/fastapi-cli/ -> 1 чанков
+INFO 2026-06-10 21:09:35,036 tasks 9988 3140 Обработана страница 133/151: https://fastapi.tiangolo.com/tutorial/body-updates/ -> 4 чанков
+INFO 2026-06-10 21:09:35,443 tasks 9988 3140 Обработана страница 134/151: https://fastapi.tiangolo.com/tutorial/security/simple-oauth2/ -> 15 чанков
+INFO 2026-06-10 21:09:35,593 tasks 9988 3140 Обработана страница 135/151: https://fastapi.tiangolo.com/advanced/ -> 1 чанков
+INFO 2026-06-10 21:09:35,834 tasks 9988 3140 Обработана страница 136/151: https://fastapi.tiangolo.com/reference/dependencies/ -> 5 чанков
+INFO 2026-06-10 21:09:36,027 tasks 9988 3140 Обработана страница 137/151: https://fastapi.tiangolo.com/advanced/additional-status-codes/ -> 1 чанков
+INFO 2026-06-10 21:09:37,069 tasks 9988 3140 Обработана страница 138/151: https://fastapi.tiangolo.com/tutorial/sql-databases/ -> 56 чанков
+INFO 2026-06-10 21:09:37,315 tasks 9988 3140 Обработана страница 139/151: https://fastapi.tiangolo.com/tutorial/extra-models/ -> 4 чанков
+INFO 2026-06-10 21:09:37,569 tasks 9988 3140 Обработана страница 140/151: https://fastapi.tiangolo.com/reference/middleware/ -> 5 чанков
+INFO 2026-06-10 21:09:37,744 tasks 9988 3140 Обработана страница 141/151: https://fastapi.tiangolo.com/advanced/dataclasses/ -> 1 чанков
+INFO 2026-06-10 21:09:38,078 tasks 9988 3140 Обработана страница 142/151: https://fastapi.tiangolo.com/advanced/middleware/ -> 1 чанков
+INFO 2026-06-10 21:09:38,258 tasks 9988 3140 Обработана страница 143/151: https://fastapi.tiangolo.com/advanced/using-request-directly/ -> 1 чанков
+INFO 2026-06-10 21:09:38,515 tasks 9988 3140 Обработана страница 144/151: https://fastapi.tiangolo.com/tutorial/response-model/ -> 9 чанков
+INFO 2026-06-10 21:09:38,699 tasks 9988 3140 Обработана страница 145/151: https://fastapi.tiangolo.com/advanced/response-directly/ -> 1 чанков
+INFO 2026-06-10 21:09:38,882 tasks 9988 3140 Обработана страница 146/151: https://fastapi.tiangolo.com/advanced/testing-websockets/ -> 1 чанков
+INFO 2026-06-10 21:09:39,083 tasks 9988 3140 Обработана страница 147/151: https://fastapi.tiangolo.com/reference/templating/ -> 1 чанков
+INFO 2026-06-10 21:09:39,294 tasks 9988 3140 Обработана страница 148/151: https://fastapi.tiangolo.com/python-types/ -> 5 чанков
+INFO 2026-06-10 21:09:39,648 tasks 9988 3140 Обработана страница 149/151: https://fastapi.tiangolo.com/reference/testclient/ -> 11 чанков
+INFO 2026-06-10 21:09:39,869 tasks 9988 3140 Обработана страница 150/151: https://fastapi.tiangolo.com/tutorial/header-params/ -> 1 чанков
+INFO 2026-06-10 21:09:40,073 tasks 9988 3140 Обработана страница 151/151: https://fastapi.tiangolo.com/deployment/fastapicloud/ -> 1 чанков
+INFO 2026-06-10 21:09:40,076 tasks 9988 3140 Обработка KB 1 завершена. Страниц: 151, Чанков: 944, Ошибок: 0
+WARNING 2026-06-10 21:16:15,374 log 7512 7184 Not Found: /api/llm/providers/None/
+INFO 2026-06-10 21:21:08,116 autoreload 7512 544 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\urls.py changed, reloading.
+INFO 2026-06-10 21:21:11,337 autoreload 28776 7152 Watching for file changes with StatReloader
+INFO 2026-06-10 21:21:44,955 autoreload 28776 7152 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\views.py changed, reloading.
+INFO 2026-06-10 21:21:45,901 autoreload 25172 25036 Watching for file changes with StatReloader
+INFO 2026-06-10 21:22:13,919 autoreload 19740 27480 Watching for file changes with StatReloader
+WARNING 2026-06-10 21:22:46,864 log 19740 27972 Not Found: /api/llm/providers/None/
+INFO 2026-06-10 21:27:31,185 autoreload 19740 27480 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\serializers.py changed, reloading.
+INFO 2026-06-10 21:27:32,145 autoreload 28124 13288 Watching for file changes with StatReloader
+INFO 2026-06-10 21:33:24,674 autoreload 28124 13288 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\serializers.py changed, reloading.
+INFO 2026-06-10 21:33:25,672 autoreload 15848 20336 Watching for file changes with StatReloader
+INFO 2026-06-10 21:35:34,680 autoreload 26900 5256 Watching for file changes with StatReloader

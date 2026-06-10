@@ -8,46 +8,84 @@ logger = logging.getLogger(__name__)
 async def get_chat_settings(chat_id: int, jwt_token: str | None = None) -> dict | None:
     """
     Получает настройки чата из Django API.
-    Возвращает словарь с полями: system_prompt, top_k, model_name, knowledge_base_id
-    Если чат не найден или нет доступа — возвращает None.
     """
-    url = f"{DJANGO_API_URL}/chats/{chat_id}/"
+    url = f"{DJANGO_API_URL}/llm/chats/{chat_id}/"
     headers = {}
     if jwt_token:
         headers["Authorization"] = f"Bearer {jwt_token}"
     
     try:
         async with httpx.AsyncClient(timeout=10.0) as client:
+            # 1. Получаем чат
             response = await client.get(url, headers=headers)
+            if response.status_code != 200:
+                logger.error(f"Failed to get chat: {response.status_code}")
+                return None
             
-            if response.status_code == 200:
-                data = response.json()
-                logger.info(f"Chat {chat_id} settings retrieved")
-                return {
-                    "system_prompt": data.get("system_prompt", ""),
-                    "top_k": data.get("top_k", 5),
-                    "model_name": data.get("model_name", "gpt-4o-mini"),
-                    "knowledge_base_id": data.get("knowledge_base"),
-                }
-            elif response.status_code == 404:
-                logger.warning(f"Chat {chat_id} not found")
+            chat_data = response.json()
+            llm_model_id = chat_data.get("llm_model")
+            
+            if not llm_model_id:
+                logger.error(f"Chat {chat_id} has no llm_model")
                 return None
-            elif response.status_code == 403:
-                logger.warning(f"Access denied to chat {chat_id}")
+            
+            # 2. Получаем модель LLM
+            model_url = f"{DJANGO_API_URL}/llm/models/{llm_model_id}/"
+            model_response = await client.get(model_url, headers=headers)
+            if model_response.status_code != 200:
+                logger.error(f"Failed to get model {llm_model_id}")
                 return None
-            else:
-                logger.error(f"Unexpected response from Django: {response.status_code}")
+            
+            model_data = model_response.json()
+            provider_id = model_data.get("provider")
+            
+            # 3. Получаем провайдера
+            provider_url = f"{DJANGO_API_URL}/llm/providers/{provider_id}/"
+            provider_response = await client.get(provider_url, headers=headers)
+            if provider_response.status_code != 200:
+                logger.error(f"Failed to get provider {provider_id}")
                 return None
+            
+            provider_data = provider_response.json()
+            
+            # 4. Получаем API-ключ пользователя
+            api_key_url = f"{DJANGO_API_URL}/llm/user-api-keys/?provider={provider_id}"
+            api_key_response = await client.get(api_key_url, headers=headers)
+            api_key = None
+            if api_key_response.status_code == 200:
+                keys = api_key_response.json()
+                if keys:
+                    api_key = keys[0].get("api_key")
+                    logger.info(f"API key retrieved for provider {provider_id}")
+            
+            return {
+                "knowledge_base_id": chat_data.get("knowledge_base"),
+                "top_k": chat_data.get("top_k", 5),
+                "llm_provider": {
+                    "id": provider_data.get("id"),
+                    "name": provider_data.get("slug"),
+                    "base_url": provider_data.get("base_url"),
+                    "api_key": api_key,
+                    "default_model": model_data.get("model_id"),
+                    "default_temperature": provider_data.get("default_temperature", 0.7),
+                    "supports_streaming": provider_data.get("supports_streaming", True),
+                    "default_system_prompt": provider_data.get("default_system_prompt", "")
+                },
+                "override_model": None,
+                "override_temperature": chat_data.get("temperature"),
+                "override_system_prompt": chat_data.get("system_prompt")
+            }
+            
     except Exception as e:
         logger.error(f"Failed to get chat settings: {e}")
         return None
-    
+
+
 async def get_chat_history(chat_id: int, jwt_token: str, limit: int = 10) -> list[dict]:
     """
-    Получает последние сообщения чата из Django API.
-    Возвращает список сообщений в формате [{"role": "user", "content": "..."}, ...]
+    Получает последние сообщения чата из Django API (новые эндпоинты).
     """
-    url = f"{DJANGO_API_URL}/messages/?chat={chat_id}"
+    url = f"{DJANGO_API_URL}/llm/messages/?chat={chat_id}"
     headers = {"Authorization": f"Bearer {jwt_token}"}
     
     try:
@@ -55,9 +93,7 @@ async def get_chat_history(chat_id: int, jwt_token: str, limit: int = 10) -> lis
             response = await client.get(url, headers=headers)
             if response.status_code == 200:
                 messages = response.json()
-                # Берём последние 'limit' сообщений
                 messages = messages[-limit:] if len(messages) > limit else messages
-                # Преобразуем в формат для LLM
                 history = [
                     {"role": msg["role"], "content": msg["content"]}
                     for msg in messages
@@ -70,3 +106,32 @@ async def get_chat_history(chat_id: int, jwt_token: str, limit: int = 10) -> lis
     except Exception as e:
         logger.error(f"Error getting chat history: {e}")
         return []
+
+
+async def save_message(chat_id: int, role: str, content: str, jwt_token: str) -> bool:
+    """
+    Сохраняет сообщение через Django API (новые эндпоинты).
+    """
+    url = f"{DJANGO_API_URL}/llm/messages/"
+    headers = {
+        "Authorization": f"Bearer {jwt_token}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "chat": chat_id,
+        "role": role,
+        "content": content,
+    }
+    
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.post(url, json=payload, headers=headers)
+            if response.status_code == 201:
+                logger.info(f"Message saved: role={role}")
+                return True
+            else:
+                logger.warning(f"Failed to save message: {response.status_code}")
+                return False
+    except Exception as e:
+        logger.error(f"Error saving message: {e}")
+        return False

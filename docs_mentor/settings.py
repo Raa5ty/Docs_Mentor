@@ -27,6 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+# Security warning: don't run with debug turned on in production!
+CRYPTOGRAPHY_SECRET_KEY = os.getenv('CRYPTOGRAPHY_SECRET_KEY').encode('utf-8')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
@@ -44,8 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_cryptography',
     'pgvector',
     'knowledge_bases_app.apps.KnowledgeBasesAppConfig',
+    'llms_app.apps.LlmsAppConfig'
     
 ]
 
