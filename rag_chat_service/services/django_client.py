@@ -1,13 +1,15 @@
 import httpx
 import logging
 from ..config import DJANGO_API_URL
+from ..database import get_user_api_key
 
 logger = logging.getLogger(__name__)
 
 
-async def get_chat_settings(chat_id: int, jwt_token: str | None = None) -> dict | None:
+async def get_chat_settings(chat_id: int, jwt_token: str | None = None, user_id: int | None = None) -> dict | None:
     """
     Получает настройки чата из Django API.
+    API ключ получает напрямую из БД, минуя Django API.
     """
     url = f"{DJANGO_API_URL}/llm/chats/{chat_id}/"
     headers = {}
@@ -47,23 +49,23 @@ async def get_chat_settings(chat_id: int, jwt_token: str | None = None) -> dict 
                 return None
             
             provider_data = provider_response.json()
+            provider_slug = provider_data.get("slug")
             
-            # 4. Получаем API-ключ пользователя
-            api_key_url = f"{DJANGO_API_URL}/llm/user-api-keys/?provider={provider_id}"
-            api_key_response = await client.get(api_key_url, headers=headers)
+            # 4. Получаем API-ключ НАПРЯМУЮ ИЗ БД (через user_id)
             api_key = None
-            if api_key_response.status_code == 200:
-                keys = api_key_response.json()
-                if keys:
-                    api_key = keys[0].get("api_key")
-                    logger.info(f"API key retrieved for provider {provider_id}")
+            if user_id and provider_slug:
+                api_key = await get_user_api_key(user_id, provider_slug)
+                if api_key:
+                    logger.info(f"API key retrieved from DB for provider {provider_slug}")
+                else:
+                    logger.warning(f"No API key found for user {user_id}, provider {provider_slug}")
             
             return {
                 "knowledge_base_id": chat_data.get("knowledge_base"),
                 "top_k": chat_data.get("top_k", 5),
                 "llm_provider": {
                     "id": provider_data.get("id"),
-                    "name": provider_data.get("slug"),
+                    "name": provider_slug,
                     "base_url": provider_data.get("base_url"),
                     "api_key": api_key,
                     "default_model": model_data.get("model_id"),

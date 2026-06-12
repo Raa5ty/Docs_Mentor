@@ -91,5 +91,25 @@ async def search_chunks(
             "metadata": row["metadata"] if row["metadata"] else {},
             "similarity": float(row["similarity"]) if row["similarity"] else 0.0
         })
-    
+          
     return results
+
+
+async def get_user_api_key(user_id: int, provider_slug: str) -> str | None:
+    """
+    Получает API ключ пользователя напрямую из БД.
+    """
+    pool = await get_pool()
+    async with pool.acquire() as conn:
+        row = await conn.fetchrow(
+            """
+            SELECT uk.api_key 
+            FROM llms_app_userapikey uk
+            JOIN llms_app_llmprovider p ON uk.provider_id = p.id
+            WHERE uk.user_id = $1 
+              AND p.slug = $2 
+              AND uk.is_active = True
+            """,
+            user_id, provider_slug
+        )
+        return row["api_key"] if row else None

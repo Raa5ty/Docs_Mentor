@@ -46,40 +46,20 @@ class KnowledgeBaseStatusView(generics.RetrieveAPIView):
 
 
 class KnowledgeBaseSearchView(generics.GenericAPIView):
-    """Эндпоинт для тестового поиска по чанкам (без LLM)"""
     permission_classes = [IsAuthenticated]
     
     def post(self, request, pk):
-        kb = get_object_or_404(KnowledgeBase, pk=pk, owner=request.user)
+        get_object_or_404(KnowledgeBase, pk=pk, owner=request.user)
         
         serializer = SearchRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         
-        query = serializer.validated_data['query']
-        top_k = serializer.validated_data.get('top_k', 5)
-        
-        # TODO: Генерация эмбеддинга запроса через OpenAI
-        # Пока передаём пустой список
-        query_embedding = []
-        
-        # Поиск чанков
-        chunks = kb.search_chunks(query_embedding, top_k)
-        
-        # Формируем результат
-        results = []
-        for chunk in chunks:
-            results.append({
-                'chunk_text': chunk.chunk_text,
-                'source_url': chunk.source_url,
-                'metadata': chunk.metadata,
-                'score': 0.0  # TODO: реальная оценка схожести
-            })
-        
-        result_serializer = SearchResultSerializer(results, many=True)
-        
+        # Поиск через векторы реализован в FastAPI (rag_chat_service)
+        # Здесь оставляем заглушку для тестов
         return Response({
-            'query': query,
-            'top_k': top_k,
-            'total': len(results),
-            'results': result_serializer.data
+            'query': serializer.validated_data['query'],
+            'top_k': serializer.validated_data.get('top_k', 5),
+            'total': 0,
+            'results': [],
+            'message': 'Vector search is available via FastAPI endpoint: POST /search/{kb_id}'
         }, status=status.HTTP_200_OK)

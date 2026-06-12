@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
+from django.db.backends.signals import connection_created
 import os
 
 load_dotenv()  # Load environment variables from .env file
@@ -90,6 +91,14 @@ WSGI_APPLICATION = 'docs_mentor.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
+
+# Для автоматического создания расширения pgvector при подключении к БД (включая тестовую)
+def create_pgvector_extension(sender, connection, **kwargs):
+    if connection.vendor == 'postgresql':
+        with connection.cursor() as cursor:
+            cursor.execute('CREATE EXTENSION IF NOT EXISTS vector')
+
+connection_created.connect(create_pgvector_extension)  # Подключаем сигнал
 
 
 # Password validation

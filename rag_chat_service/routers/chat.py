@@ -10,6 +10,7 @@ from ..database import get_db_connection, search_chunks
 from ..embeddings import get_embedding
 from ..services import get_chat_settings, get_chat_history, save_message, get_provider
 from ..config import DJANGO_API_URL
+from ..auth import get_current_user
 
 router = APIRouter(tags=["Chat"])
 logger = logging.getLogger(__name__)
@@ -104,16 +105,17 @@ async def search_endpoint(
 async def ask_chat(
     chat_id: int,
     request: AskRequest,  # нужно создать модель
-    conn: Connection = Depends(get_db_connection)
+    conn: Connection = Depends(get_db_connection),
+    user_id: int = Depends(get_current_user)
 ):
     """
     RAG-ответ на основе документации.
     """
     
-    logger.info(f"Ask request: chat_id={chat_id}, message='{request.message[:50]}...'")
+    logger.info(f"Ask request: chat_id={chat_id}, user_id={user_id}, message='{request.message[:50]}...'")
     
     # 1. Получаем настройки чата из Django
-    chat_settings = await get_chat_settings(chat_id, JWT_TOKEN)
+    chat_settings = await get_chat_settings(chat_id, JWT_TOKEN, user_id)
     if not chat_settings:
         raise HTTPException(
             status_code=404,
@@ -217,15 +219,16 @@ async def ask_chat(
 async def ask_chat_stream(
     chat_id: int,
     request: AskRequest,
-    conn: Connection = Depends(get_db_connection)
+    conn: Connection = Depends(get_db_connection),
+    user_id: int = Depends(get_current_user)
 ):
     """
     RAG-ответ с потоковой передачей (SSE).
     """
-    logger.info(f"Streaming request: chat_id={chat_id}, message='{request.message[:50]}...'")
+    logger.info(f"Streaming request: chat_id={chat_id}, user_id={user_id}, message='{request.message[:50]}...'")
     
     # 1. Получаем настройки чата из Django
-    chat_settings = await get_chat_settings(chat_id, JWT_TOKEN)
+    chat_settings = await get_chat_settings(chat_id, JWT_TOKEN, user_id)
     if not chat_settings:
         raise HTTPException(
             status_code=404,

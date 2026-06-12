@@ -535,3 +535,109 @@ INFO 2026-06-10 21:27:32,145 autoreload 28124 13288 Watching for file changes wi
 INFO 2026-06-10 21:33:24,674 autoreload 28124 13288 C:\Users\rusma\Pet_Projects\docs_mentor\llms_app\serializers.py changed, reloading.
 INFO 2026-06-10 21:33:25,672 autoreload 15848 20336 Watching for file changes with StatReloader
 INFO 2026-06-10 21:35:34,680 autoreload 26900 5256 Watching for file changes with StatReloader
+WARNING 2026-06-12 18:12:30,709 log 26052 9476 Bad Request: /api/auth/register/
+WARNING 2026-06-12 18:12:30,720 log 26052 9476 Bad Request: /api/auth/register/
+WARNING 2026-06-12 18:12:32,240 log 26052 9476 Unauthorized: /api/auth/login/
+WARNING 2026-06-12 18:12:32,631 log 26052 9476 Unauthorized: /api/auth/login/
+WARNING 2026-06-12 18:12:33,405 log 26052 9476 Unauthorized: /api/auth/token/refresh/
+WARNING 2026-06-12 18:16:36,642 log 29368 16928 Bad Request: /api/auth/register/
+WARNING 2026-06-12 18:16:36,661 log 29368 16928 Bad Request: /api/auth/register/
+WARNING 2026-06-12 18:16:38,203 log 29368 16928 Unauthorized: /api/auth/login/
+WARNING 2026-06-12 18:16:38,582 log 29368 16928 Unauthorized: /api/auth/login/
+WARNING 2026-06-12 18:16:39,365 log 29368 16928 Unauthorized: /api/auth/token/refresh/
+WARNING 2026-06-12 18:21:47,043 log 17332 15680 Unauthorized: /api/knowledge-bases/
+WARNING 2026-06-12 18:21:50,008 log 17332 15680 Not Found: /api/knowledge-bases/7/
+ERROR 2026-06-12 18:21:50,438 log 17332 15680 Internal Server Error: /api/knowledge-bases/8/search/
+Traceback (most recent call last):
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\core\handlers\base.py", line 198, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\django\views\generic\base.py", line 106, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\.venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rusma\Pet_Projects\docs_mentor\knowledge_bases_app\views.py", line 66, in post
+    chunks = kb.search_chunks(query_embedding, top_k)
+             ^^^^^^^^^^^^^^^^
+AttributeError: 'KnowledgeBase' object has no attribute 'search_chunks'
+WARNING 2026-06-12 18:21:51,073 log 17332 15680 Bad Request: /api/knowledge-bases/9/search/
+WARNING 2026-06-12 18:21:51,843 log 17332 15680 Not Found: /api/knowledge-bases/10/search/
+WARNING 2026-06-12 18:21:53,015 log 17332 15680 Not Found: /api/knowledge-bases/12/status/
+WARNING 2026-06-12 18:36:01,092 log 29956 29872 Unauthorized: /api/knowledge-bases/
+WARNING 2026-06-12 18:36:03,896 log 29956 29872 Not Found: /api/knowledge-bases/7/
+WARNING 2026-06-12 18:36:04,687 log 29956 29872 Bad Request: /api/knowledge-bases/9/search/
+WARNING 2026-06-12 18:36:05,483 log 29956 29872 Not Found: /api/knowledge-bases/10/search/
+WARNING 2026-06-12 18:36:06,666 log 29956 29872 Not Found: /api/knowledge-bases/12/status/
+WARNING 2026-06-12 18:39:54,555 log 6436 28824 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 18:39:56,424 log 6436 28824 Not Found: /api/llm/messages/
+WARNING 2026-06-12 18:39:56,829 log 6436 28824 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 18:40:00,522 log 6436 28824 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 18:48:36,351 log 21788 15364 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 18:48:37,945 log 21788 15364 Not Found: /api/llm/messages/
+WARNING 2026-06-12 18:48:38,343 log 21788 15364 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 18:48:42,133 log 21788 15364 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 19:18:26,057 log 11052 15344 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 19:18:27,815 log 11052 15344 Not Found: /api/llm/messages/
+WARNING 2026-06-12 19:18:28,221 log 11052 15344 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 19:18:31,937 log 11052 15344 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 19:23:10,312 log 5128 7756 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 19:23:11,917 log 5128 7756 Not Found: /api/llm/messages/
+WARNING 2026-06-12 19:23:12,315 log 5128 7756 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 19:23:16,021 log 5128 7756 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 19:29:38,205 log 16028 29780 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 19:29:39,863 log 16028 29780 Not Found: /api/llm/messages/
+WARNING 2026-06-12 19:29:40,267 log 16028 29780 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 19:29:43,944 log 16028 29780 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 19:31:25,909 log 16360 16980 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 19:31:27,512 log 16360 16980 Not Found: /api/llm/messages/
+WARNING 2026-06-12 19:31:27,903 log 16360 16980 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 19:31:31,581 log 16360 16980 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 19:35:38,190 log 23836 17168 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 19:35:39,876 log 23836 17168 Not Found: /api/llm/messages/
+WARNING 2026-06-12 19:35:40,276 log 23836 17168 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 19:35:43,989 log 23836 17168 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 19:38:41,021 log 28532 9600 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 19:38:42,632 log 28532 9600 Not Found: /api/llm/messages/
+WARNING 2026-06-12 19:38:43,021 log 28532 9600 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 19:38:46,554 log 28532 9600 Not Found: /api/llm/user-api-keys/5/
+INFO 2026-06-12 21:34:30,211 logging_config 29988 17308 Logging configured successfully
+INFO 2026-06-12 21:34:30,211 logging_config 29988 17308 Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+INFO 2026-06-12 21:34:30,317 health 29988 17308 Health check: OK
+INFO 2026-06-12 21:34:30,321 _client 29988 17308 HTTP Request: GET http://test/health "HTTP/1.1 200 OK"
+INFO 2026-06-12 21:36:35,713 logging_config 9076 26440 Logging configured successfully
+INFO 2026-06-12 21:36:35,713 logging_config 9076 26440 Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+INFO 2026-06-12 21:36:35,822 health 9076 26440 Health check: OK
+INFO 2026-06-12 21:36:35,824 _client 9076 26440 HTTP Request: GET http://test/health "HTTP/1.1 200 OK"
+INFO 2026-06-12 21:37:12,867 logging_config 14028 15668 Logging configured successfully
+INFO 2026-06-12 21:37:12,867 logging_config 14028 15668 Log file: C:\Users\rusma\Pet_Projects\docs_mentor\logs\rag_service.log
+WARNING 2026-06-12 21:37:14,375 log 14028 15668 Unauthorized: /api/knowledge-bases/
+WARNING 2026-06-12 21:37:17,099 log 14028 15668 Not Found: /api/knowledge-bases/7/
+WARNING 2026-06-12 21:37:17,898 log 14028 15668 Bad Request: /api/knowledge-bases/9/search/
+WARNING 2026-06-12 21:37:18,696 log 14028 15668 Not Found: /api/knowledge-bases/10/search/
+WARNING 2026-06-12 21:37:19,877 log 14028 15668 Not Found: /api/knowledge-bases/12/status/
+WARNING 2026-06-12 21:37:22,687 log 14028 15668 Not Found: /api/llm/chats/6/
+WARNING 2026-06-12 21:37:24,312 log 14028 15668 Not Found: /api/llm/messages/
+WARNING 2026-06-12 21:37:24,711 log 14028 15668 Unauthorized: /api/llm/providers/
+WARNING 2026-06-12 21:37:28,326 log 14028 15668 Not Found: /api/llm/user-api-keys/5/
+WARNING 2026-06-12 21:37:29,140 log 14028 15668 Bad Request: /api/auth/register/
+WARNING 2026-06-12 21:37:29,151 log 14028 15668 Bad Request: /api/auth/register/
+WARNING 2026-06-12 21:37:30,677 log 14028 15668 Unauthorized: /api/auth/login/
+WARNING 2026-06-12 21:37:31,068 log 14028 15668 Unauthorized: /api/auth/login/
+WARNING 2026-06-12 21:37:31,849 log 14028 15668 Unauthorized: /api/auth/token/refresh/
+INFO 2026-06-12 21:37:31,891 health 14028 15668 Health check: OK
+INFO 2026-06-12 21:37:31,892 _client 14028 15668 HTTP Request: GET http://test/health "HTTP/1.1 200 OK"

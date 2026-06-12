@@ -20,6 +20,9 @@ class LLMProviderSerializer(serializers.ModelSerializer):
 
 
 class UserAPIKeySerializer(serializers.ModelSerializer):
+    api_key = serializers.CharField(write_only=True, required=True)
+    is_active = serializers.BooleanField(default=True)
+    
     class Meta:
         model = UserAPIKey
         fields = ('id', 'provider', 'api_key', 'is_active', 'created_at')
