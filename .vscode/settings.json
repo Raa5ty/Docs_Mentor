@@ -1,0 +1,21 @@
+{
+    "liveSassCompile.settings.excludeList": [
+        "**/.venv/**",
+        "**/node_modules/**",
+        "**/.git/**",
+        "**/__pycache__/**"
+    ],
+    "liveSassCompile.settings.includeItems": [
+        "/static/scss/main.scss"
+    ],
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/static/css"
+        }
+    ],
+    "liveSassCompile.settings.generateMap": false,
+    "liveSassCompile.settings.autoprefix": false,
+    "css.lint.unknownVendorSpecificProperties": "ignore"
+}

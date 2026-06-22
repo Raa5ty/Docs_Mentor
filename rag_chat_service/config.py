@@ -13,11 +13,11 @@ if not DATABASE_URL:
     raise ValueError("DATABASE_URL not set in .env file")
 
 # OpenAI (пока используем ключ GonkaAI для разработки, в будущем меняем на реальный ключ OpenAI API)
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", None)
-OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", None)
+# OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", None)
+# OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", None)
 
 # Модель для LLM (берём из .env, можно переопределить в настройках чата)
-LLM_DEFAULT_MODEL = os.getenv("LLM_DEFAULT_MODEL", "gpt-4o-mini")
+# LLM_DEFAULT_MODEL = os.getenv("LLM_DEFAULT_MODEL", "gpt-4o-mini")
 
 # Эмбеддинги (пока заглушка)
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")

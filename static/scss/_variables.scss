@@ -1,0 +1,57 @@
+// _variables.scss — все переменные тёмной темы FigmaLayout
+
+:root {
+  // Цвета (dark theme)
+  --background: #1c1a22;
+  --foreground: #ededf0;
+  --card: #26242e;
+  --card-foreground: #ededf0;
+  --popover: #26242e;
+  --popover-foreground: #ededf0;
+  --primary: #e0399a;
+  --primary-foreground: #ffffff;
+  --secondary: #333140;
+  --secondary-foreground: #ededf0;
+  --muted: #2d2b3a;
+  --muted-foreground: #9896a8;
+  --accent: #3f2238;
+  --accent-foreground: #e0399a;
+  --destructive: #c0183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.07);
+  --input-background: #333140;
+  --switch-background: #434158;
+  --ring: #e0399a;
+  --sidebar: #22202a;
+  --sidebar-foreground: #ededf0;
+  --sidebar-primary: #e0399a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #3f2238;
+  --sidebar-accent-foreground: #e0399a;
+  --sidebar-border: rgba(255, 255, 255, 0.06);
+  --sidebar-ring: #e0399a;
+
+  // Размеры
+  --font-size: 14px;
+  --radius: 0.5rem;
+
+  // Шрифты
+  --font-family: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+// Светлая тема (опционально, потом включим переключатель)
+:root.light {
+  --background: #f2f1f4;
+  --foreground: #1a1820;
+  --card: #ffffff;
+  --card-foreground: #1a1820;
+  --primary: #d4237a;
+  --primary-foreground: #ffffff;
+  --secondary: #ebebf0;
+  --border: rgba(26, 24, 32, 0.1);
+  --sidebar: #e8e7ed;
+  --sidebar-border: rgba(26, 24, 32, 0.08);
+  --input-background: #ebebf0;
+}

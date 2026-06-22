@@ -4,7 +4,6 @@ import logging
 from abc import ABC, abstractmethod
 from typing import AsyncGenerator, List, Dict, Any
 
-from ..config import OPENAI_BASE_URL, OPENAI_API_KEY
 
 logger = logging.getLogger(__name__)
 

@@ -7,11 +7,12 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.getenv("GONKA_API_KEY"),
-    base_url="https://hskyauefqcgbvgvxkluj.supabase.co/functions/v1/gonka",
+    base_url="https://api.gonka-api.org/v1",
 )
 
 resp = client.chat.completions.create(
-    model="Qwen/Qwen3-235B-A22B-Instruct-2507-FP8",
-    messages=[{"role": "user", "content": "Hello! What is GonkaAI?"}],
+    model="MiniMaxAI/MiniMax-M2.7",
+    messages=[{"role": "user", "content": "Привет! Что такое GonkaAI?"}],
 )
 print(resp.choices[0].message.content)
+

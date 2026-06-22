@@ -34,7 +34,7 @@ CRYPTOGRAPHY_SECRET_KEY = os.getenv('CRYPTOGRAPHY_SECRET_KEY').encode('utf-8')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'django']
 
 
 # Application definition
@@ -70,7 +70,7 @@ ROOT_URLCONF = 'docs_mentor.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Указываем путь к директории с шаблонами
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -136,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Указываем путь к директории со статикой
 
 # Кастомная модель пользователя
 AUTH_USER_MODEL = 'users_app.User'

@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 async def get_chat_settings(chat_id: int, jwt_token: str | None = None, user_id: int | None = None) -> dict | None:
     """
     Получает настройки чата из Django API.
-    API ключ получает напрямую из БД, минуя Django API.
+    Приоритет: Chat > UserProviderSettings > LLMProvider
     """
     url = f"{DJANGO_API_URL}/llm/chats/{chat_id}/"
     headers = {}
@@ -51,27 +51,88 @@ async def get_chat_settings(chat_id: int, jwt_token: str | None = None, user_id:
             provider_data = provider_response.json()
             provider_slug = provider_data.get("slug")
             
-            # 4. Получаем API-ключ НАПРЯМУЮ ИЗ БД (через user_id)
+            # 4. Получаем API-ключ
             api_key = None
             if user_id and provider_slug:
-                api_key = await get_user_api_key(user_id, provider_slug)
+                api_key = await get_user_api_key(user_id, provider_slug, jwt_token)
                 if api_key:
                     logger.info(f"API key retrieved from DB for provider {provider_slug}")
                 else:
                     logger.warning(f"No API key found for user {user_id}, provider {provider_slug}")
             
+            # 5. Получаем настройки пользователя для этого провайдера
+            user_settings = None
+            if user_id:
+                settings_url = f"{DJANGO_API_URL}/llm/user-provider-settings/"
+                settings_response = await client.get(
+                    settings_url,
+                    headers=headers,
+                    params={"provider": provider_id}
+                )
+                if settings_response.status_code == 200:
+                    settings_data = settings_response.json()
+                    if settings_data:
+                        user_settings = settings_data[0]
+                        logger.info(f"User settings found for provider {provider_slug}")
+                    else:
+                        logger.info(f"No user settings for provider {provider_slug}, using provider defaults")
+                else:
+                    logger.warning(f"Failed to get user settings: {settings_response.status_code}")
+            
+            # 6. Определяем значения с приоритетом: Chat > UserProviderSettings > LLMProvider
+            
+            # Температура
+            if chat_data.get("temperature") is not None:
+                temperature = chat_data.get("temperature")
+            elif user_settings and user_settings.get("temperature") is not None:
+                temperature = user_settings.get("temperature")
+            else:
+                temperature = provider_data.get("default_temperature", 0.7)
+            
+            # Системный промт
+            if chat_data.get("system_prompt"):
+                system_prompt = chat_data.get("system_prompt")
+            elif user_settings and user_settings.get("system_prompt"):
+                system_prompt = user_settings.get("system_prompt")
+            else:
+                system_prompt = provider_data.get("default_system_prompt", "")
+            
+            # top_k
+            if chat_data.get("top_k") is not None:
+                top_k = chat_data.get("top_k")
+            elif user_settings and user_settings.get("top_k") is not None:
+                top_k = user_settings.get("top_k")
+            else:
+                top_k = 5
+            
+            # Модель по умолчанию (используем ту, что в чате)
+            default_model = model_data.get("model_id")
+            
+            # Если в пользовательских настройках указана другая модель по умолчанию
+            # и в чате не переопределена, используем её
+            if user_settings and user_settings.get("default_model"):
+                default_model_id = user_settings.get("default_model")
+                if default_model_id:
+                    dm_url = f"{DJANGO_API_URL}/llm/models/{default_model_id}/"
+                    dm_response = await client.get(dm_url, headers=headers)
+                    if dm_response.status_code == 200:
+                        dm_data = dm_response.json()
+                        default_model = dm_data.get("model_id")
+            
+            logger.info(f"Resolved settings: temperature={temperature}, top_k={top_k}")
+            
             return {
                 "knowledge_base_id": chat_data.get("knowledge_base"),
-                "top_k": chat_data.get("top_k", 5),
+                "top_k": top_k,
                 "llm_provider": {
                     "id": provider_data.get("id"),
                     "name": provider_slug,
                     "base_url": provider_data.get("base_url"),
                     "api_key": api_key,
-                    "default_model": model_data.get("model_id"),
-                    "default_temperature": provider_data.get("default_temperature", 0.7),
+                    "default_model": default_model,
+                    "default_temperature": temperature,
                     "supports_streaming": provider_data.get("supports_streaming", True),
-                    "default_system_prompt": provider_data.get("default_system_prompt", "")
+                    "default_system_prompt": system_prompt
                 },
                 "override_model": None,
                 "override_temperature": chat_data.get("temperature"),

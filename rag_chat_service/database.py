@@ -95,21 +95,31 @@ async def search_chunks(
     return results
 
 
-async def get_user_api_key(user_id: int, provider_slug: str) -> str | None:
+async def get_user_api_key(user_id: int, provider_slug: str, jwt_token: str = None) -> str | None:
     """
-    Получает API ключ пользователя напрямую из БД.
+    Получает API ключ пользователя через Django API (расшифрованный).
     """
-    pool = await get_pool()
-    async with pool.acquire() as conn:
-        row = await conn.fetchrow(
-            """
-            SELECT uk.api_key 
-            FROM llms_app_userapikey uk
-            JOIN llms_app_llmprovider p ON uk.provider_id = p.id
-            WHERE uk.user_id = $1 
-              AND p.slug = $2 
-              AND uk.is_active = True
-            """,
-            user_id, provider_slug
-        )
-        return row["api_key"] if row else None
+    import httpx
+    import logging
+    from .config import DJANGO_API_URL
+    
+    logger = logging.getLogger(__name__)
+    
+    url = f"{DJANGO_API_URL}/llm/user-api-keys/decrypted/?provider={provider_slug}"
+    
+    headers = {}
+    if jwt_token:
+        headers["Authorization"] = f"Bearer {jwt_token}"
+    
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(url, headers=headers)
+            if response.status_code == 200:
+                data = response.json()
+                return data.get('api_key')
+            else:
+                logger.warning(f"Failed to get API key: {response.status_code}")
+                return None
+    except Exception as e:
+        logger.error(f"Error getting API key: {e}")
+        return None

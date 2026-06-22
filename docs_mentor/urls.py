@@ -16,10 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('users_app.urls')),
     path('api/', include('knowledge_bases_app.urls')),
     path('api/llm/', include('llms_app.urls')),
+    # Главная страница (фронтенд)
+    path('', TemplateView.as_view(template_name='chat/index.html'), name='home'),
+    path('login/', TemplateView.as_view(template_name='login.html'), name='login'),
+    path('register/', TemplateView.as_view(template_name='register.html'), name='register'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

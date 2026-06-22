@@ -1,18 +1,23 @@
-version: '3.8'
+# Docker Compose configuration for Docs Mentor application
 
 services:
   postgres:
-    image: pgvector/pgvector:pg16  # Официальный образ с pgvector
+    image: pgvector/pgvector:pg16
     container_name: docs_mentor_postgres
     environment:
-      POSTGRES_DB: docs_mentor_DB      # Имя БД
-      POSTGRES_USER: docs_user      # Пользователь
-      POSTGRES_PASSWORD: docs_pass  # Пароль
+      POSTGRES_DB: docs_mentor_DB
+      POSTGRES_USER: docs_user
+      POSTGRES_PASSWORD: docs_pass
     ports:
-      - "5432:5432"                 # Хост:контейнер
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # Сохраняем данные между перезапусками
+      - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U docs_user -d docs_mentor_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7-alpine
@@ -21,6 +26,72 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  django:
+    build: .
+    container_name: docs_mentor_django
+    command: uv run python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - /app/.venv
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://docs_user:docs_pass@postgres:5432/docs_mentor_DB
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: rag_chat_service/Dockerfile
+    container_name: docs_mentor_fastapi
+    command: uv run uvicorn rag_chat_service.main:app --host 0.0.0.0 --port 8001 --reload
+    volumes:
+      - .:/app
+      - /app/.venv
+    ports:
+      - "8001:8001"
+    environment:
+      - DATABASE_URL=postgresql://docs_user:docs_pass@postgres:5432/docs_mentor_DB
+      - DJANGO_API_URL=http://django:8000/api
+    depends_on:
+      django:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  celery:
+    build: .
+    container_name: docs_mentor_celery
+    command: uv run celery -A docs_mentor worker --pool=solo --loglevel=info
+    volumes:
+      - .:/app
+      - /app/.venv
+    environment:
+      - DATABASE_URL=postgresql://docs_user:docs_pass@postgres:5432/docs_mentor_DB
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      django:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     restart: unless-stopped
 
 volumes:

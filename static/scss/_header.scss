@@ -1,0 +1,255 @@
+// _header.scss — шапка
+
+.header {
+  position: relative;
+  z-index: 10;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+// Левая часть: логотип
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  background-color: var(--primary);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--primary-foreground);
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: -0.02em;
+}
+
+.logo-text span {
+  color: var(--primary);
+}
+
+// Правая часть: пользователь
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--foreground);
+  background-color: var(--secondary);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: var(--border);
+}
+
+.account-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 32px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.account-btn:hover {
+  color: var(--foreground);
+  background-color: var(--secondary);
+}
+
+.account-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.account-btn-text {
+    font-size: 0.75rem;
+    display: none;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+    .account-btn-text {
+        display: inline;
+    }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  border: 1px solid rgba(224, 57, 154, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.avatar span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-foreground);
+}
+
+// Выпадающее меню аккаунта (изначально скрыто)
+.account-dropdown {
+  position: absolute;
+  top: 52px;
+  right: 20px;
+  width: 280px;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  z-index: 50;
+  display: none;
+}
+
+.account-dropdown.open {
+  display: block;
+}
+
+.dropdown-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background-color: var(--secondary);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.dropdown-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  border: 1px solid rgba(224, 57, 154, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown-avatar span {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-foreground);
+}
+
+.dropdown-user-info h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.dropdown-user-info p {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+}
+
+.dropdown-menu {
+  padding: 8px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: var(--foreground);
+  cursor: pointer;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+.dropdown-item:hover {
+  background-color: var(--secondary);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--border);
+  margin: 8px 0;
+}
+
+.dropdown-item.logout {
+  color: var(--destructive);
+}
+
+.dropdown-item.logout:hover {
+  background-color: rgba(192, 24, 61, 0.1);
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+
+.breadcrumb-separator {
+  color: var(--muted-foreground);
+  opacity: 0.5;
+}
+
+.breadcrumb-kb, .breadcrumb-chat {
+  font-weight: 500;
+}
+
+.breadcrumb-kb {
+  color: var(--primary);
+}
+
+.breadcrumb-chat {
+  color: var(--foreground);
+}

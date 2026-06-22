@@ -1,0 +1,250 @@
+// _chat.scss — центральная панель
+
+.chat-center {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    background: var(--background);
+}
+
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 0;
+}
+
+// Тулбар чата — только уникальные стили (высоту и отступы берём из _base.scss)
+.chat-toolbar {
+    background: var(--card);
+    justify-content: space-between;
+}
+
+.provider-model-bar {
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--muted-foreground);
+}
+
+.provider-model-bar .separator {
+    margin: 0 8px;
+    color: var(--border);
+}
+
+#providerName {
+    color: var(--primary);
+}
+
+#modelName {
+    color: var(--foreground);
+}
+
+.sources-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 12px;
+    color: var(--muted-foreground);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sources-toggle-btn:hover {
+    border-color: var(--primary);
+    color: var(--foreground);
+}
+
+.sources-toggle-btn.active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(224, 57, 154, 0.08);
+}
+
+.sources-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--muted);
+    color: var(--muted-foreground);
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.sources-toggle-btn.active .sources-count {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+
+#message-input {
+    background: var(--input-background);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    color: var(--foreground);
+    resize: none;
+    font-family: inherit;
+    font-size: 13px;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+#message-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+#message-input::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.6;
+}
+
+.send-btn {
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border: none;
+    border-radius: 12px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.send-btn:hover {
+    background-color: rgba(224, 57, 154, 0.9);
+}
+
+.send-btn svg {
+    stroke: white;
+}
+
+/* Сообщения */
+.message {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+    max-width: 85%;
+}
+
+.message.user {
+    margin-left: auto;
+    flex-direction: row-reverse;
+}
+
+.message.assistant {
+    margin-right: auto;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px; /* квадратные с небольшим скруглением */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+}
+
+.message.user .message-avatar {
+    background: var(--secondary);
+    color: var(--muted-foreground);
+}
+
+.message.assistant .message-avatar {
+    background: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.message-content {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+
+.message.user .message-content {
+    background: var(--primary);
+    color: var(--primary-foreground);
+    border-bottom-right-radius: 4px;
+}
+
+.message.assistant .message-content {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    border-bottom-left-radius: 4px;
+}
+
+/* Время сообщения */
+.message-time {
+    font-size: 10px;
+    color: var(--muted-foreground);
+    margin-top: 4px;
+    font-family: var(--font-mono);
+}
+
+.message.user .message-time {
+    text-align: right;
+}
+
+/* Индикатор стриминга */
+.message.assistant.streaming .message-content::after {
+    content: '▍';
+    animation: blink 1s step-end infinite;
+    color: var(--primary);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Блоки кода в сообщениях */
+.message-content pre {
+    background: var(--input-background);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px;
+    overflow-x: auto;
+    margin: 8px 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.message-content code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    background: var(--input-background);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.message-content pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+}
+
+.message-content p {
+    margin: 0 0 8px 0;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}

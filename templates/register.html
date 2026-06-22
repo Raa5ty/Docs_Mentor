@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация — Docs Mentor AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; width: 400px;">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Регистрация</h2>
+        
+        <form id="register-form">
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem;">Email</label>
+                <input type="email" id="email" required style="width: 100%; padding: 0.5rem; background: var(--input-background); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground);">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem;">Имя пользователя (опционально)</label>
+                <input type="text" id="username" style="width: 100%; padding: 0.5rem; background: var(--input-background); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground);">
+            </div>
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem;">Пароль</label>
+                <input type="password" id="password1" required style="width: 100%; padding: 0.5rem; background: var(--input-background); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground);">
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem;">Подтверждение пароля</label>
+                <input type="password" id="password2" required style="width: 100%; padding: 0.5rem; background: var(--input-background); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground);">
+            </div>
+            <button type="submit" style="width: 100%; padding: 0.5rem; background: var(--primary); color: var(--primary-foreground); border: none; border-radius: 0.25rem; cursor: pointer;">Зарегистрироваться</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 1rem; color: var(--muted-foreground);">
+            Уже есть аккаунт? <a href="/login/" style="color: var(--primary);">Войти</a>
+        </p>
+        <div id="error" style="color: var(--destructive); text-align: center; margin-top: 1rem; display: none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('register-form');
+        const errorDiv = document.getElementById('error');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.style.display = 'none';
+            
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password1 = document.getElementById('password1').value;
+            const password2 = document.getElementById('password2').value;
+            
+            if (password1 !== password2) {
+                errorDiv.textContent = 'Пароли не совпадают';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/auth/register/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, username, password1, password2 })
+                });
+                
+                if (response.ok) {
+                    // Автоматический вход после регистрации
+                    const loginResponse = await fetch('/api/auth/login/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password: password1 })
+                    });
+                    
+                    if (loginResponse.ok) {
+                        const data = await loginResponse.json();
+                        localStorage.setItem('access_token', data.access);
+                        localStorage.setItem('refresh_token', data.refresh);
+                        window.location.href = '/';
+                    } else {
+                        window.location.href = '/login/';
+                    }
+                } else {
+                    const data = await response.json();
+                    errorDiv.textContent = Object.values(data).flat().join(', ');
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Ошибка соединения с сервером';
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

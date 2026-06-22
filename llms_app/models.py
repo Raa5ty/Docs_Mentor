@@ -20,6 +20,11 @@ class UserAPIKey(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    @classmethod
+    def get_user_providers(cls, user):
+        """Возвращает список провайдеров, для которых у пользователя есть API-ключ"""
+        return cls.objects.filter(user=user, is_active=True).values_list('provider', flat=True)
+    
     class Meta:
         verbose_name = "API ключ пользователя"
         verbose_name_plural = "API ключи пользователей"
@@ -76,6 +81,46 @@ class LLMModel(models.Model):
     
     def __str__(self):
         return f"{self.provider.name} - {self.display_name}"  
+
+class UserProviderSettings(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="provider_settings",
+        verbose_name="Пользователь"
+    )
+    provider = models.ForeignKey(
+        "LLMProvider",
+        on_delete=models.CASCADE,
+        related_name="user_settings",
+        verbose_name="Провайдер"
+    )
+    
+    # Настройки пользователя для этого провайдера
+    temperature = models.FloatField(null=True, blank=True, verbose_name="Температура")
+    system_prompt = models.TextField(null=True, blank=True, verbose_name="Системный промт")
+    top_k = models.IntegerField(default=5, verbose_name="Количество чанков")
+    similarity_threshold = models.FloatField(default=0.7, verbose_name="Порог сходства")
+    default_model = models.ForeignKey(
+        "LLMModel",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="Модель по умолчанию"
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Настройки провайдера для пользователя"
+        verbose_name_plural = "Настройки провайдеров для пользователей"
+        unique_together = [["user", "provider"]]
+        ordering = ["user", "provider"]
+    
+    def __str__(self):
+        return f"{self.user.email} - {self.provider.name}"
+
     
 class Chat(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название чата")

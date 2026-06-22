@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — Docs Mentor AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh;">
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; width: 400px;">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Вход в Docs Mentor AI</h2>
+        
+        <form id="login-form">
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; margin-bottom: 0.5rem;">Email</label>
+                <input type="email" id="email" required style="width: 100%; padding: 0.5rem; background: var(--input-background); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground);">
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.5rem;">Пароль</label>
+                <input type="password" id="password" required style="width: 100%; padding: 0.5rem; background: var(--input-background); border: 1px solid var(--border); border-radius: 0.25rem; color: var(--foreground);">
+            </div>
+            <button type="submit" style="width: 100%; padding: 0.5rem; background: var(--primary); color: var(--primary-foreground); border: none; border-radius: 0.25rem; cursor: pointer;">Войти</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 1rem; color: var(--muted-foreground);">
+            Нет аккаунта? <a href="/register/" style="color: var(--primary);">Регистрация</a>
+        </p>
+        <div id="error" style="color: var(--destructive); text-align: center; margin-top: 1rem; display: none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('login-form');
+        const errorDiv = document.getElementById('error');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorDiv.style.display = 'none';
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('/api/auth/login/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access);
+                    localStorage.setItem('refresh_token', data.refresh);
+                    window.location.href = '/';
+                } else {
+                    errorDiv.textContent = 'Неверный email или пароль';
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent = 'Ошибка соединения с сервером';
+                errorDiv.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

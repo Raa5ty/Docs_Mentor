@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import LLMProvider, LLMModel, Chat, Message, UserAPIKey
+from .models import LLMProvider, LLMModel, Chat, Message, UserAPIKey, UserProviderSettings
 
 
 class LLMModelSerializer(serializers.ModelSerializer):
@@ -27,6 +27,20 @@ class UserAPIKeySerializer(serializers.ModelSerializer):
         model = UserAPIKey
         fields = ('id', 'provider', 'api_key', 'is_active', 'created_at')
         read_only_fields = ('id', 'created_at')
+
+class UserProviderSettingsSerializer(serializers.ModelSerializer):
+    provider_name = serializers.ReadOnlyField(source='provider.name')
+    model_display_name = serializers.ReadOnlyField(source='default_model.display_name')
+    
+    class Meta:
+        model = UserProviderSettings
+        fields = (
+            'id', 'user', 'provider', 'provider_name',
+            'temperature', 'system_prompt', 'top_k', 'similarity_threshold',
+            'default_model', 'model_display_name',
+            'created_at', 'updated_at'
+        )
+        read_only_fields = ('id', 'user', 'created_at', 'updated_at', 'provider_name', 'model_display_name')
 
 
 class ChatSerializer(serializers.ModelSerializer):

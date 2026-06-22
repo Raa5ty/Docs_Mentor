@@ -1,5 +1,6 @@
 import logging
 import json
+from fastapi.security import HTTPAuthorizationCredentials
 import httpx
 from fastapi import APIRouter, Depends, HTTPException
 from asyncpg import Connection
@@ -10,13 +11,11 @@ from ..database import get_db_connection, search_chunks
 from ..embeddings import get_embedding
 from ..services import get_chat_settings, get_chat_history, save_message, get_provider
 from ..config import DJANGO_API_URL
-from ..auth import get_current_user
+from ..auth import get_current_user, security
 
 router = APIRouter(tags=["Chat"])
 logger = logging.getLogger(__name__)
 
-# JWT токен для тестирования (вынесен в одно место)
-JWT_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgxMTczNzAwLCJpYXQiOjE3ODEwODczMDAsImp0aSI6ImJhZThhYzExYWU3YzQxY2Q5YTU5NTZmZjEyOGY3NGFkIiwidXNlcl9pZCI6IjEifQ.-rgvx8ju491dsvKxBRdciXCmbXo-F93Az583Gii2vnI'
 
 # Модель запроса для поиска
 class SearchRequest(BaseModel):
@@ -104,18 +103,20 @@ async def search_endpoint(
 @router.post("/chat/{chat_id}/ask")
 async def ask_chat(
     chat_id: int,
-    request: AskRequest,  # нужно создать модель
+    request: AskRequest,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     conn: Connection = Depends(get_db_connection),
     user_id: int = Depends(get_current_user)
 ):
     """
     RAG-ответ на основе документации.
     """
+    jwt_token = credentials.credentials
     
     logger.info(f"Ask request: chat_id={chat_id}, user_id={user_id}, message='{request.message[:50]}...'")
     
     # 1. Получаем настройки чата из Django
-    chat_settings = await get_chat_settings(chat_id, JWT_TOKEN, user_id)
+    chat_settings = await get_chat_settings(chat_id, jwt_token, user_id)
     if not chat_settings:
         raise HTTPException(
             status_code=404,
@@ -163,7 +164,7 @@ async def ask_chat(
     context = "\n\n---\n\n".join(context_parts)
     
     # 5. Получаем историю чата
-    chat_history = await get_chat_history(chat_id, JWT_TOKEN, limit=10)
+    chat_history = await get_chat_history(chat_id, jwt_token, limit=10)
     logger.info(f"Retrieved {len(chat_history)} messages from chat history")
     
     # 6. Формируем промт для LLM
@@ -205,8 +206,8 @@ async def ask_chat(
         answer = "Извините, произошла ошибка при генерации ответа. Пожалуйста, попробуйте позже."
     
     # 8. Сохраняем сообщения
-    await save_message(chat_id, "user", request.message, JWT_TOKEN)
-    await save_message(chat_id, "assistant", answer, JWT_TOKEN)
+    await save_message(chat_id, "user", request.message, jwt_token)
+    await save_message(chat_id, "assistant", answer, jwt_token)
     
     return {
         "chat_id": chat_id,
@@ -219,16 +220,19 @@ async def ask_chat(
 async def ask_chat_stream(
     chat_id: int,
     request: AskRequest,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
     conn: Connection = Depends(get_db_connection),
     user_id: int = Depends(get_current_user)
 ):
     """
     RAG-ответ с потоковой передачей (SSE).
     """
+    jwt_token = credentials.credentials
+    
     logger.info(f"Streaming request: chat_id={chat_id}, user_id={user_id}, message='{request.message[:50]}...'")
     
     # 1. Получаем настройки чата из Django
-    chat_settings = await get_chat_settings(chat_id, JWT_TOKEN, user_id)
+    chat_settings = await get_chat_settings(chat_id, jwt_token, user_id)
     if not chat_settings:
         raise HTTPException(
             status_code=404,
@@ -276,7 +280,7 @@ async def ask_chat_stream(
     context = "\n\n---\n\n".join(context_parts)
     
     # 5. Получаем историю чата
-    chat_history = await get_chat_history(chat_id, JWT_TOKEN, limit=10)
+    chat_history = await get_chat_history(chat_id, jwt_token, limit=10)
     logger.info(f"Retrieved {len(chat_history)} messages from chat history")
     
     # 6. Формируем промт для LLM
@@ -327,8 +331,8 @@ async def ask_chat_stream(
             }
         
         # Сохраняем сообщения
-        await save_message(chat_id, "user", request.message, JWT_TOKEN)
-        await save_message(chat_id, "assistant", full_answer, JWT_TOKEN)
+        await save_message(chat_id, "user", request.message, jwt_token)
+        await save_message(chat_id, "assistant", full_answer, jwt_token)
         
         # Сигнал завершения
         yield {

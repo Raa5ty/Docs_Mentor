@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LLMProvider, LLMModel, Chat, Message, UserAPIKey
+from .models import LLMProvider, LLMModel, Chat, Message, UserAPIKey, UserProviderSettings
 from .forms import UserAPIKeyAdminForm
 
 
@@ -48,3 +48,29 @@ class UserAPIKeyAdmin(admin.ModelAdmin):
     def short_api_key(self, obj):
         return "sk_****" if obj.api_key else "—"
     short_api_key.short_description = "API key"
+
+
+@admin.register(UserProviderSettings)
+class UserProviderSettingsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'provider', 'temperature', 'top_k', 'similarity_threshold', 'default_model', 'updated_at')
+    list_filter = ('provider', 'user')
+    search_fields = ('user__email', 'provider__name')
+    readonly_fields = ('user', 'provider', 'created_at', 'updated_at')
+    
+    fieldsets = (
+        ('Пользователь и провайдер', {
+            'fields': ('user', 'provider')
+        }),
+        ('Настройки', {
+            'fields': ('temperature', 'system_prompt', 'top_k', 'similarity_threshold', 'default_model')
+        }),
+        ('Системные', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+    
+    def has_add_permission(self, request):
+        return False
+    
+    def has_delete_permission(self, request, obj=None):
+        return True

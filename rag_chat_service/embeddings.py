@@ -1,6 +1,6 @@
 import logging
 import random
-from .config import OPENAI_API_KEY, EMBEDDING_MODEL, USE_FAKE_EMBEDDINGS
+from .config import EMBEDDING_MODEL, USE_FAKE_EMBEDDINGS
 
 logger = logging.getLogger(__name__)
 
